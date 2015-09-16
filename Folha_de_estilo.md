@@ -29,8 +29,9 @@ O OptimusC se trata de um compilador que abstrai os conceitos de boas técnicas 
 |(r) |O carácter “r”, sendo que os parêntesis permitem estipular precedências|
 |xyz* |A sequência “xy” seguida de zero ou mais “z”s|
 |(xyz)* |A sequência “xyz” repetida zero ou mais vezes|
-|r\s |O carácter “r” ou “s” (alternativa)( \ coresponde a barra vertical do teclado)|
+|(x\|y)*xyz |Todos caracteres x ou y termidados em xyz|
+|r\|s |O carácter “r” ou “s” (alternativa)|
 |ˆr |O carácter “r” apenas se no início da linha|
 |r$ |O carácter “r” apenas se no final da linha (não consome o \n)|
 |ˆxyz$| Uma linha que contém apenas a cadeia de caracteres “xyz”|
-|<< EOF >>| Fim de ficheiro|
+|<\<EOF>\>| Fim de ficheiro|
