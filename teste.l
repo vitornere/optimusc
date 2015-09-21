@@ -4,9 +4,9 @@
 
 /* Expressões Regulares */
 
-digit		[0-9]
-INT         {digit}+
-exponant	[eE][+-]?{INT}
+
+INT         [-+]?[0-9]+
+exponant	[eE]{INT}
 FLOAT       {INT}("."{INT})?{exponant}?
 CHAR        (\')[.]?(\')
 STRING      ("\""){.}+("\"")
@@ -24,8 +24,15 @@ STRING			{ yylval = atof(yytext); return(TK_RE_STRING); }
 
 %%
 
-yywrap () {
+void yyerror(char* str) {
+	printf("Erro: \n%s\n", str);
+}
+
+int main() {
+	void yyparser();
 	return 0;
 }
+
+
 
 

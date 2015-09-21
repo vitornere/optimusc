@@ -5,15 +5,27 @@
 
 %token TK_RE_INT
 %token TK_RE_FLOAT
-%token TK_RE_BOOL
 %token TK_RE_CHAR
 %token TK_RE_STRING
 %token END
 %start start
 
 %%
+3 3.3 's' "ss"
 
-start:
+int x = 3;
+
+start: end
+
+end: END | string
+
+string: TK_RE_STRING | char
+
+char: TK_RE_CHAR | float
+
+float: TK_RE_FLOAT | int
+
+int: TK_RE_INT
 
 %%
 
