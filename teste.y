@@ -11,10 +11,6 @@
 %start start
 
 %%
-3 3.3 's' "ss"
-
-int x = 3;
-
 start: end
 
 end: END | string
