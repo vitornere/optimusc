@@ -36,7 +36,17 @@
 
 start:
 	TK_END_INST {  }
-	| int_attribuited start
+	| float_attribuited start
+;
+
+float_attribuited:
+	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT TK_END_INST_LINE { }
+	| float_only_declarated
+;
+
+float_only_declarated:
+	TK_RE_FLOAT TK_VARIABLE TK_END_INST_LINE { }
+	| int_attribuited
 ;
 
 int_attribuited:
