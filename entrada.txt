@@ -5,4 +5,6 @@
 	float realMenor;
     char b = 'b';
     char a;
+	float real = 1.0;
+	float realMenor;
 }
