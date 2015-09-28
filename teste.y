@@ -6,20 +6,20 @@
 #include <string.h>
 %}
 
-%token TK_RE_INT
-%token TK_RE_FLOAT
-%token TK_RE_CHAR
-%token TK_RE_STRING
-%token TK_VALUE_INT
-%token TK_VALUE_FLOAT
-%token TK_VALUE_CHAR
-%token TK_VALUE_STRING
-%token TK_VARIABLE
-%token TK_END_INST_LINE
-%token TK_INIT_INST
-%token TK_END_INST
-%token TK_ATTRIBUITION
-%token TK_TYPE
+%token <int_val> TK_RE_INT
+%token <int_val> TK_RE_FLOAT
+%token <int_val> TK_RE_CHAR
+%token <int_val> TK_RE_STRING
+%token <int_val> TK_VALUE_INT
+%token <float_val> TK_VALUE_FLOAT
+%token <char_val> TK_VALUE_CHAR
+%token <char*_val> TK_VALUE_STRING
+%token <char*_val> TK_VARIABLE
+%token <int_val> TK_END_INST_LINE
+%token <int_val> TK_INIT_INST
+%token <int_val> TK_END_INST
+%token <int_val> TK_ATTRIBUITION
+%token <char*_val> TK_TYPE
 %start start
 
 %union {
@@ -35,24 +35,23 @@
 %%
 
 start:
-	TK_END_INST
-	| int_attribuited
+	TK_END_INST {  }
+	| int_attribuited start
 ;
 
 int_attribuited:
-	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT TK_END_INST_LINE { }
+	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT TK_END_INST_LINE {  }
 	| int_only_declarated
 ;
 
 int_only_declarated:
-	TK_RE_INT TK_VARIABLE TK_END_INST_LINE { }
+	TK_RE_INT TK_VARIABLE TK_END_INST_LINE
 	| init_inst
 ;
 
 init_inst:
 	TK_INIT_INST { }
 ;
-
 %%
 
 int yywrap() { return 1; }

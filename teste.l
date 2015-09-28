@@ -22,7 +22,6 @@ WHITESPACE  [ \t\v\f]*
 NEWLINE		[\n|\n\l|\r\n]
 VARIABLE	([a-zA-Z_][a-zA-Z0-9_]*)
 TYPE		(int|float|char)
-ATTRIBUITION ("=")
 
 /* Regras */
 %%
@@ -39,7 +38,16 @@ ATTRIBUITION ("=")
 	printf("\nLexico: Encontrado TYPE => %s", strdup(yytext));
 	yylval.type = (char*) malloc(sizeof(char)*strlen(strdup(yytext)));
 	strcpy(yylval.type, strdup(yytext));
-	return(TK_TYPE);
+
+	if(!strcmp(yylval.type, "int")) {
+		return(TK_RE_INT);
+	}
+	else if(!strcmp(yylval.type, "float")) {
+		return(TK_RE_FLOAT);
+	}
+	else if(!strcmp(yylval.type, "char")) {
+		return(TK_RE_CHAR);
+	}
 }
 
 {INT} {
@@ -56,8 +64,14 @@ ATTRIBUITION ("=")
 
 {CHAR} {
 	printf("\nLexico: Encontrado CHAR atribuido => %c", atof(yytext));
-	yylval.caracter = atof(yytext);
-	return(TK_VALUE_CHAR);
+	if(yytext[1] != '\'') {
+		yylval.caracter = yytext[1];
+		return(TK_VALUE_CHAR);
+	}
+	else {
+		printf("\nVariavel char iniciada vazio\n");
+		exit(1);
+	}
 }
 
 STRING {
@@ -67,30 +81,30 @@ STRING {
 }
 
 ";"	{
-	printf("\nLexico: Encontrado ;");
+	printf("\nLexico: Encontrado ;\n");
 	return(TK_END_INST_LINE);
 }
 
 "{" {
-	printf("\nLexico: Encontrado {");
+	printf("\nLexico: Encontrado {\n");
 	return(TK_INIT_INST);
 }
 
 "}" {
-	printf("\nLexico: Encontrado }");
+	printf("\nLexico: Encontrado }\n");
 	return(TK_END_INST);
 }
 
 {VARIABLE} {
-	printf("\nLexico: Encontrado VARIAVEL %s\n", yytext);
+	printf("\nLexico: Encontrado VARIAVEL %s", yytext);
 	yylval.variable = (char*) malloc(sizeof(char)*strlen(strdup(yytext)));
 	strcpy(yylval.variable, strdup(yytext));
 	return(TK_VARIABLE);
 }
 
-ATTRIBUITION {
-	printf("\nLexico: Encontrado %c", yytext);
-	yylval.caracter = atof(yytext);
+"=" {
+	printf("\nLexico: Encontrado %c", yytext[0]);
+	yylval.caracter = yytext[0];
 	return(TK_ATTRIBUITION);
 }
 

@@ -4,4 +4,4 @@ calc: teste.l teste.y
 	mv teste.tab.c sintatico.c
 	flex teste.l
 	mv lex.yy.c lexico.c
-	gcc -o calc.exe sintatico.c lexico.c
+	gcc -o optimus.exe sintatico.c lexico.c
