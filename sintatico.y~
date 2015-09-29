@@ -71,7 +71,7 @@ int_function:
 
 int_function_declared:
 	TK_RE_INT TK_FUNCTION TK_END_INST_LINE
-	| return_declared_int
+	| return_declared
 ;
 
 return_declared_int:

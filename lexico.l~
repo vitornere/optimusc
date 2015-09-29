@@ -49,6 +49,9 @@ TYPE		(int|float|char)
 	else if(!strcmp(yylval.type, "char")) {
 		return(TK_RE_CHAR);
 	}
+	//else if(!strcmp(yylval.type, "return")) {
+	//	return(TK_RE_RETURN);
+	//}
 }
 
 
