@@ -3,4 +3,6 @@
 	int y = 3;
 	float real = 1.0;
 	float realMenor;
+    char b = 'b' ;
+    char a;
 }
