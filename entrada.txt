@@ -1,4 +1,6 @@
 {
 	int x;
 	int y = 3;
+    char b = 'b' ;
+    char a;
 }

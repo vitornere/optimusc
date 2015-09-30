@@ -16,7 +16,7 @@
 INT         [-+]?[0-9]+
 exponant	[eE]{INT}
 FLOAT       {INT}("."[0-9]+)?{exponant}?
-CHAR        (\')[.]?(\')
+CHAR        (\').{1}(\')
 STRING      ("\""){.}+("\"")
 WHITESPACE  [ \t\v\f]*
 NEWLINE		[\n|\n\l|\r\n]
@@ -63,15 +63,9 @@ TYPE		(int|float|char)
 }
 
 {CHAR} {
-	printf("\nLexico: Encontrado CHAR atribuido => %c", atof(yytext));
-	if(yytext[1] != '\'') {
-		yylval.caracter = yytext[1];
-		return(TK_VALUE_CHAR);
-	}
-	else {
-		printf("\nVariavel char iniciada vazio\n");
-		exit(1);
-	}
+	printf("\nLexico: Encontrado CHAR atribuido => %c", yytext[1]);
+	yylval.caracter = yytext[1];
+	return(TK_VALUE_CHAR);
 }
 
 STRING {
@@ -86,6 +80,7 @@ STRING {
 }
 
 "{" {
+
 	printf("\nLexico: Encontrado {\n");
 	return(TK_INIT_INST);
 }

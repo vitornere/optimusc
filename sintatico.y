@@ -46,7 +46,17 @@ int_attribuited:
 
 int_only_declarated:
 	TK_RE_INT TK_VARIABLE TK_END_INST_LINE
-	| init_inst
+	| char_attribuited
+;
+
+char_attribuited:
+    TK_RE_CHAR TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR TK_END_INST_LINE {  }
+    | char_only_declarated
+;
+
+char_only_declarated:
+    TK_RE_CHAR TK_VARIABLE TK_END_INST_LINE {  }
+    | init_inst
 ;
 
 init_inst:
