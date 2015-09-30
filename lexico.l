@@ -51,8 +51,8 @@ TYPE		(int|float|char)
 }
 
 {INT} {
-	printf("\nLexico: Encontrado INT atribuido => %d", atof(yytext));
-	yylval.number_int = atof(yytext);
+	printf("\nLexico: Encontrado INT atribuido => %d", atoi(yytext));
+	yylval.number_int = atoi(yytext);
 	return(TK_VALUE_INT);
 }
 
@@ -69,7 +69,7 @@ TYPE		(int|float|char)
 }
 
 STRING {
-	printf("\nLexico: Encontrado STRING atribuido => %s", atof(yytext));
+	printf("\nLexico: Encontrado STRING atribuido => %s", (yytext));
 	yylval.string = strdup(yytext);
 	return(TK_VALUE_STRING);
 }
