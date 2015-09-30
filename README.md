@@ -35,3 +35,27 @@ O OptimusC se trata de um compilador que abstrai os conceitos de boas técnicas 
 |r$ |O carácter “r” apenas se no final da linha (não consome o \n)|
 |ˆxyz$| Uma linha que contém apenas a cadeia de caracteres “xyz”|
 |<\<EOF>\>| Fim de ficheiro|
+
+### 3-Declarações do BISON:
+
+Sumário das declarações usadas para definir a gramática no bison:
+
+| Declaração | Descrição|
+| ----| ----------- |
+|%union|Declara a coleção de tipos de dados que podem ter valores semânticos|
+|%token|Declara um símbolo terminal (nome do tipo token) sem precedência ou associatividade especificado|
+|%right|Declara um símbolo terminal (nome do tipo token) que é associativa à direita|
+|%left|Declara um símbolo terminal (nome do tipo token) que é associativa à esquerda|
+|%type|Declara o tipo de valores semânticos para um símbolo não-terminal|
+|%start|Especifique símbolo de começo do gramática|
+|%define variable \| %define variable value \| %define variable {value} \| %define variable "value"|Definie uma variável para ajustar o comportamento do Bison|
+|%defines|Faz um arquivo de cabeçalho parser contendo definições macro para os nomes de tipo de token definidas na gramática, bem como algumas outras declarações. Se o arquivo de implementação analisador é nomeado nome.c o arquivo gerado de cabeçalho é nomeado name.h.|
+|%destructor|Especifica como o analisador deve recuperar a memória associada a símbolos descartados|
+|%file-prefix "prefix"|Especifica um prefixo para todos os nomes de arquivo de saída Bison. Os nomes são escolhidos são os arquivo de gramática nomeados prefix.y|
+|%language "language"|Especifica a linguagem de programação para o analisador gerado. Línguas atualmente suportadas incluem C, C ++ e Java|
+|%locations|Gera o código de processamento dos locais. Este modo é ativado assim que a gramática usa o token especial '@n', mas se sua gramática não usá-lo, usando '% localizações' permite mensagens de erro de sintaxe mais precisos.|
+|%output "file"|Gera a implementação analisador no arquivo|
+|%verbose|Faz um arquivo de saída adicional contendo descrições detalhadas dos estados do analisador e o que é feito para cada tipo de token de verificação à frente nesse estado|
+|%yacc|Trabalho como se a opção --yacc tivesse sido dada, ou seja, imitar Yacc, incluindo as suas convenções de nomenclatura|
+
+Para mais informações  a cerca das declarações visite o site do manual do [BISON](http://www.gnu.org/software/bison/manual/html_node/Decl-Summary.html).
