@@ -63,8 +63,8 @@ TYPE		(int|float|char)
 }
 
 {CHAR} {
-	printf("\nLexico: Encontrado CHAR atribuido => %c", atof(yytext));
-	yylval.caracter = atof(yytext);
+	printf("\nLexico: Encontrado CHAR atribuido => %c", yytext[1]);
+	yylval.caracter = yytext[1];
 	return(TK_VALUE_CHAR);
 }
 
