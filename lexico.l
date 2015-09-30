@@ -20,7 +20,6 @@ CHAR        	(\')[.]?(\')
 STRING      	("\""){.}+("\"")
 WHITESPACE  	[ \t\v\f]*
 NEWLINE		[\n|\n\l|\r\n]
-FUNCTION	([a-zA-Z][a-zA-Z0-9_]*\(([a-zA-Z][a-zA-Z0-9_]*)?\))
 VARIABLE	([a-zA-Z_][a-zA-Z0-9_]*)
 TYPE		(int|float|char)
 
@@ -54,19 +53,19 @@ TYPE		(int|float|char)
 
 
 {INT} {
-	printf("\nLexico: Encontrado INT atribuido  %d", atoi(yytext));
+	printf("\nLexico: Encontrado INT de valor:  %d", atoi(yytext));
 	yylval.number_int = atoi(yytext);
 	return(TK_VALUE_INT);
 }
 
 {FLOAT} {
-	printf("\nLexico: Encontrado FLOAT atribuido  %f", atof(yytext));
+	printf("\nLexico: Encontrado FLOAT de valor:  %f", atof(yytext));
 	yylval.number_float = atof(yytext);
 	return(TK_VALUE_FLOAT);
 }
 
 {CHAR} {
-	printf("\nLexico: Encontrado CHAR atribuido  %c", atoi(yytext));
+	printf("\nLexico: Encontrado CHAR de valor:  %c", atoi(yytext));
 	if(yytext[1] != '\'') {
 		yylval.caracter = yytext[1];
 		return(TK_VALUE_CHAR);
@@ -98,19 +97,28 @@ STRING {
 	return(TK_END_INST);
 }
 
+"(" {
+	printf("\nLexico: Encontrado (\n");
+	return(TK_INIT_BRACKETS);
+}
+
+
+")" {
+	printf("\nLexico: Encontrado )\n");
+	return(TK_END_BRACKETS);
+}
+
+"," {
+	printf("\nLexico: Encontrado ,\n");
+	return(TK_COMA);
+}
+
 "return" {
 	printf("\nLexico: Encontrado return \n");
 	return(TK_RE_RETURN);
 }
 
 
-
-{FUNCTION} {
-	printf("\nLexico: Encontrada FUNCAO %s", yytext);
-	yylval.function = (char*) malloc(sizeof(char)*strlen(strdup(yytext)));
-	strcpy(yylval.function, strdup(yytext));
-	return(TK_FUNCTION);
-}
 
 {VARIABLE} {
 	printf("\nLexico: Encontrado VARIAVEL %s", yytext);

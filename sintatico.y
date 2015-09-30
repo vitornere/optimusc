@@ -20,8 +20,10 @@
 %token <int_val> TK_END_INST_LINE
 %token <int_val> TK_INIT_INST
 %token <int_val> TK_END_INST
+%token <int_val> TK_INIT_BRACKETS
+%token <int_val> TK_END_BRACKETS
+%token <int_val> TK_COMA
 %token <int_val> TK_ATTRIBUITION
-%token <char*_val> TK_TYPE
 %start start
 
 %union {
@@ -38,10 +40,21 @@
 %%
 
 start:
-	TK_END_INST {  }
-	| float_attribuited start
+	TK_END_INST 
+	| int_function start
 ;
 
+
+atribution_int:
+	TK_RE_INT  TK_VARIABLE TK_COMA atribution_int
+	| TK_RE_INT TK_VARIABLE
+; 
+
+int_function:
+	TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS atribution_int TK_END_BRACKETS TK_INIT_INST
+	| TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	| float_attribuited  
+;
 
 
 float_attribuited:
@@ -61,18 +74,10 @@ int_attribuited:
 
 int_only_declarated:
 	TK_RE_INT TK_VARIABLE TK_END_INST_LINE
-	| int_function
-;
-
-int_function:
-	TK_RE_INT TK_FUNCTION TK_INIT_INST
-	| int_function_declared
-;
-
-int_function_declared:
-	TK_RE_INT TK_FUNCTION TK_END_INST_LINE
 	| return_declared_int
 ;
+
+
 
 return_declared_int:
 	TK_RE_RETURN TK_VALUE_INT TK_END_INST_LINE

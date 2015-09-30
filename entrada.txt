@@ -1,4 +1,4 @@
-int main(teste) {
+int main() {
 	int x;
 	int y = 3;
 	float real = 1.0;
