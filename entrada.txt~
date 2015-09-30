@@ -1,8 +1,0 @@
-int main(teste) {
-	int x();
-	int y = 3;
-	float real = 1.0;
-	float realMenor;
-
-	return 0;
-}

@@ -59,8 +59,10 @@ extern int yydebug;
     TK_END_INST_LINE = 269,
     TK_INIT_INST = 270,
     TK_END_INST = 271,
-    TK_ATTRIBUITION = 272,
-    TK_TYPE = 273
+    TK_INIT_BRACKETS = 272,
+    TK_END_BRACKETS = 273,
+    TK_COMA = 274,
+    TK_ATTRIBUITION = 275
   };
 #endif
 
@@ -69,7 +71,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 27 "sintatico.y" /* yacc.c:1909  */
+#line 29 "sintatico.y" /* yacc.c:1909  */
 
     int     	number_int;
     float   	number_float;
@@ -80,7 +82,7 @@ union YYSTYPE
     char*	type;
 
 
-#line 84 "sintatico.tab.h" /* yacc.c:1909  */
+#line 86 "sintatico.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
