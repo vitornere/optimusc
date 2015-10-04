@@ -4,88 +4,160 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+extern FILE* yyout;
+
+int amount_space = 0, i, open_file = 0;
+char const tab[4] = "    ";
 %}
 
-%token <int_val> TK_RE_INT
-%token <int_val> TK_RE_FLOAT
-%token <int_val> TK_RE_CHAR
-%token <int_val> TK_RE_STRING
-%token <int_val> TK_RE_RETURN
-%token <int_val> TK_VALUE_INT
-%token <float_val> TK_VALUE_FLOAT
-%token <char_val> TK_VALUE_CHAR
-%token <char*_val> TK_VALUE_STRING
-%token <char*_val> TK_FUNCTION
-%token <char*_val> TK_VARIABLE
-%token <int_val> TK_END_INST_LINE
-%token <int_val> TK_INIT_INST
-%token <int_val> TK_END_INST
-%token <int_val> TK_INIT_BRACKETS
-%token <int_val> TK_END_BRACKETS
-%token <int_val> TK_COMA
-%token <int_val> TK_ATTRIBUITION
+%token TK_RE_INT
+%token TK_RE_FLOAT
+%token TK_RE_CHAR
+%token TK_RE_STRING
+%token TK_RE_RETURN
+%token <number_int> TK_VALUE_INT
+%token <number_float> TK_VALUE_FLOAT
+%token <caracter> TK_VALUE_CHAR
+%token <string> TK_VALUE_STRING
+%token <string> TK_VARIABLE
+%token TK_END_INST_LINE
+%token TK_INIT_INST
+%token TK_END_INST
+%token TK_INIT_BRACKETS
+%token TK_END_BRACKETS
+%token TK_COMA
+%token TK_ATTRIBUITION
+%token <string> TK_LIBRARY
+
 %start start
 
 %union {
-    int     	number_int;
-    float   	number_float;
-    char    	caracter;
-    char*   	string;
-    char*	variable;
-    char*	function;
-    char*	type;
-
+    int     number_int;
+    float   number_float;
+    char    caracter;
+    char*   string;
 }
 
 %%
 
 start:
-	TK_END_INST 
+	TK_END_INST
+	{
+		fprintf(yyout, "}");
+	}
 	| int_function start
 ;
 
-
 atribution_int:
 	TK_RE_INT  TK_VARIABLE TK_COMA atribution_int
+	{
+		fprintf(yyout, "int %s, ", $2);
+	}
 	| TK_RE_INT TK_VARIABLE
-; 
+	{
+		fprintf(yyout, "int %s", $2);
+	}
+;
 
 int_function:
-	TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS atribution_int TK_END_BRACKETS TK_INIT_INST
+	TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS
+	{
+		fprintf(yyout, "\n");
+
+		for(i = 0; i<amount_space; i++) {
+			fprintf(yyout, "\t");
+		}
+
+		fprintf(yyout, "int %s(", $2);
+	}
+	atribution_int TK_END_BRACKETS TK_INIT_INST
+	{
+		fprintf(yyout, ") {\n");
+		amount_space++;
+	}
 	| TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
-	| float_attribuited  
+	{
+		fprintf(yyout, "\n");
+
+		for(i = 0; i<amount_space; i++) {
+			fprintf(yyout, "\t");
+		}
+
+		fprintf(yyout, "int %s() {\n", $2);
+		amount_space++;
+	}
+	| float_attribuited
 ;
 
 
 float_attribuited:
-	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT TK_END_INST_LINE { }
+	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT TK_END_INST_LINE
+	{
+		for(i = 0; i<amount_space; i++) {
+			fprintf(yyout, "\t");
+		}
+
+		fprintf(yyout, "float %s = %f;\n", $2, $4);
+	}
 	| float_only_declarated
 ;
 
 float_only_declarated:
-	TK_RE_FLOAT TK_VARIABLE TK_END_INST_LINE { }
+	TK_RE_FLOAT TK_VARIABLE TK_END_INST_LINE
+	{
+		for(i = 0; i<amount_space; i++) {
+			fprintf(yyout, "\t");
+		}
+
+		fprintf(yyout, "float %s;\n", $2);
+	}
 	| int_attribuited
 ;
 
 int_attribuited:
-	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT TK_END_INST_LINE {  }
+	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT TK_END_INST_LINE
+	{
+		for(i = 0; i<amount_space; i++) {
+			fprintf(yyout, "\t");
+		}
+
+		fprintf(yyout, "int %s = %d;\n", $2, $4);
+	}
 	| int_only_declarated
 ;
 
 int_only_declarated:
 	TK_RE_INT TK_VARIABLE TK_END_INST_LINE
+	{
+		for(i = 0; i<amount_space; i++) {
+			fprintf(yyout, "\t");
+		}
+
+		fprintf(yyout, "int %s;\n", $2);
+	}
 	| return_declared_int
 ;
 
-
-
 return_declared_int:
 	TK_RE_RETURN TK_VALUE_INT TK_END_INST_LINE
-	| init_inst
+	{
+		fprintf(yyout, "\nreturn %d;\n", $2);
+	}
+	| declarated_library
 ;
 
-init_inst:
-	TK_INIT_INST { }
+declarated_library:
+	TK_LIBRARY
+	{
+		if(!open_file)
+		{
+			yyout = fopen("saida.txt", "w");
+			open_file = 1;
+		}
+
+		fprintf(yyout, "%s\n", $1);
+	}
 ;
 %%
 

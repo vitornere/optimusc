@@ -1,0 +1,11 @@
+#include "minha.h"
+#include <stdio.h>
+
+int main() {
+	int x;
+	int y = 3;
+	float real = 1.000000;
+	float realMenor;
+
+return 0;
+}

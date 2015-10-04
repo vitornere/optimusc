@@ -1,8 +1,10 @@
-int main() {
-	int x;
-	int y = 3;
-	float real = 1.0;
-	float realMenor;
+#include "minha.h"
+#include <stdio.h>
 
-	return 0;
+int main(){
+int x;
+int y = 3;
+float real = 1.0;
+float realMenor;
+return 0;
 }
