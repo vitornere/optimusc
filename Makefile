@@ -5,3 +5,6 @@ calc: lexico.l sintatico.y
 	flex lexico.l
 	mv lex.yy.c lexico.c
 	gcc -o optimus.exe sintatico.c lexico.c
+
+clean:
+	rm -f *~ *.h *.c
