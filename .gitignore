@@ -32,5 +32,6 @@
 *.dSYM/
 
 # Projeto
-*.h
-*.c
+sintatico.h 
+sintatico.c 
+lexico.c

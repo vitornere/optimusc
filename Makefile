@@ -7,4 +7,4 @@ calc: lexico.l sintatico.y
 	gcc -o optimus.exe sintatico.c lexico.c
 
 clean:
-	rm -f *~ *.h *.c
+	rm -f *~ sintatico.h sintatico.c lexico.c
