@@ -16,6 +16,7 @@ char const tab[4] = "    ";
 %token TK_RE_CHAR
 %token TK_RE_STRING
 %token TK_RE_RETURN
+%token TK_RE_IF
 %token <number_int> TK_VALUE_INT
 %token <number_float> TK_VALUE_FLOAT
 %token <caracter> TK_VALUE_CHAR

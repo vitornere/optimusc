@@ -109,6 +109,11 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	return(TK_RE_RETURN);
 }
 
+"if" {
+	printf("\nLexico: Encontrado: if");
+	return(TK_RE_IF);
+}
+
 {VARIABLE} {
 	printf("\nLexico: Encontrado VARIAVEL: %s\n", yytext);
 	yylval.string = (char*) malloc(sizeof(char)*strlen(yytext));
