@@ -4,7 +4,7 @@
 
 typedef struct List {
     char *predecessor;
-    char **librarys;
+    char *librarys;
     char *type;
     char *variable;
     char attribution; // =
@@ -36,7 +36,7 @@ header* initial_header() {
     return init_header;
 }
 
-list* initial_list(header *fixed_header) {
+list* initial_list() {
 
     list *init_list = (list*) malloc(sizeof(list));
 

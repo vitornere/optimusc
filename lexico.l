@@ -6,7 +6,8 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-	extern FILE* yyin;
+	#include "lista.h"
+	extern FILE *yyin;
 %}
 
 /* Expressões Regulares */
@@ -128,6 +129,8 @@ void yyerror(char* str) {
 }
 
 int main() {
+
+
 	if((yyin = fopen("entrada.txt", "r")) == NULL) {
 		printf("\nErro ao abrir o arquivo!\n");
 		exit(1);

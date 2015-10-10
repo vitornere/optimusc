@@ -4,10 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "lista.h"
 
 extern FILE* yyout;
+header *fixed_header;
+list *current_list;
 
-int amount_space = 0, i, open_file = 0;
+int amount_space = 0, amount_librarys = 0, i, open_file = 0;
 char const tab[4] = "    ";
 %}
 
@@ -174,8 +177,15 @@ return_declared_int:
 declarated_library:
 	TK_LIBRARY
 	{
+        amount_librarys++;
 		if(!open_file)
 		{
+            fixed_header = initial_header();
+            current_list = NULL;
+            current_list = initial_list();
+//            current_list = (list*) malloc(sizeof(list));
+//            current_list -> librarys = (char*) malloc(sizeof(char)*strlen($1));
+
 			yyout = fopen("saida.txt", "w");
 			open_file = 1;
 		}
