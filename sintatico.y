@@ -28,6 +28,8 @@ char const tab[4] = "    ";
 %token TK_INIT_BRACKETS
 %token TK_END_BRACKETS
 %token TK_COMA
+%token TK_AND
+%token TK_OR
 %token TK_ATTRIBUITION
 %token TK_COMPARISON_LT /*Less than  '<' */
 %token TK_COMPARISON_GT /*Greater than '>' */
@@ -200,7 +202,10 @@ condition_comparator:
 ;
 
 condition_expression:
-	condition_valid_values condition_comparator condition_valid_values 
+	condition_valid_values condition_comparator condition_valid_values TK_AND condition_expression
+	|condition_valid_values condition_comparator condition_valid_values TK_OR condition_expression
+	|condition_valid_values condition_comparator condition_valid_values
+	
 ;
 
 conditional_if:

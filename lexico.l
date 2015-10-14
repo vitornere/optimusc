@@ -136,15 +136,24 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 }
 
 "==" {
-	printf("Lexico: Encontrado: %c", yytext[0]);
+	printf("Lexico: Encontrado: ==");
 	return(TK_COMPARISON_ET);
 } 
 
 "!=" {
-	printf("Lexico: Encontrado: %c", yytext[0]);
+	printf("Lexico: Encontrado: !=");
 	return(TK_COMPARISON_DT);
 }
 
+"&&" {
+	printf("Lexico: Encontrado: AND");
+	return(TK_AND);
+}
+
+"||" {
+	printf("Lexico: Encontrado: OR");
+	return(TK_OR);
+}
 %%
 
 void yyerror(char* str) {
