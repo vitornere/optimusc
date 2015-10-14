@@ -9,7 +9,7 @@ extern FILE* yyout;
 header *fixed_header;
 list *current_list;
 
-int amount_space = 0, amount_librarys = 0, i, open_file = 0;
+int amount_space = 0, i, started_header = 0;
 char const tab[4] = "    ";
 %}
 
@@ -176,28 +176,20 @@ return_declared_int:
 declarated_library:
 	TK_LIBRARY
 	{
-        amount_librarys++;
-		if(!open_file)
+		if(!started_header)
 		{
             fixed_header = initial_header();
             current_list = initial_list();
             current_list -> librarys = aloc_string($1);
             insert_elem(fixed_header, current_list);
-			fixed_header->n_elem++;
-			//printf("\n\n---Tamanho%d---\n\n",fixed_header->n_elem);
-			yyout = fopen("saida.txt", "w");
-			open_file = 1;
+			started_header = 1;
 		}
 		else {
 			current_list = NULL;
 			current_list = initial_list();
 			current_list -> librarys = aloc_string($1);
 			insert_elem(fixed_header, current_list);
-			fixed_header->n_elem++;
-			//printf("\n\n--Tamanho%d--Alocado porra 1: %s\n\nAlocado porra 2: %s",fixed_header->n_elem, fixed_header->head->librarys, fixed_header->head->next->librarys);
-			
 		}
-		fprintf(yyout, "%s\n", $1);
 	}
 ;
 %%
