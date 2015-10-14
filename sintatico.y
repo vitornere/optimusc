@@ -43,6 +43,7 @@ char const tab[4] = "    ";
 %%
 
 start:
+
 	TK_END_INST
 	{
 		fprintf(yyout, "}");
@@ -51,6 +52,7 @@ start:
 ;
 
 atribution_int:
+
 	TK_RE_INT  TK_VARIABLE TK_COMA atribution_int
 	{
 		fprintf(yyout, "int %s, ", $2);
@@ -62,6 +64,8 @@ atribution_int:
 ;
 
 int_function:
+
+
 	TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS
 	{
 		fprintf(yyout, "\n");
@@ -168,6 +172,14 @@ return_declared_int:
 	TK_RE_RETURN TK_VALUE_INT TK_END_INST_LINE
 	{
 		fprintf(yyout, "\nreturn %d;\n", $2);
+	}
+	| conditional_if
+;
+
+conditional_if:
+	TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST int_function TK_END_INST
+	{
+		printf("\n If encontrado;\n");
 	}
 	| declarated_library
 ;

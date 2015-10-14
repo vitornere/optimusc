@@ -9,4 +9,9 @@ float realMenor;
 char b = 'b';
 char a;
 return 0;
+
+if(0){
+	int x = 1;
+}
+
 }
