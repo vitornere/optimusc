@@ -201,11 +201,14 @@ condition_comparator:
 	|TK_COMPARISON_LT
 ;
 
+valid_condition:
+	condition_valid_values condition_comparator condition_valid_values
+;
+
 condition_expression:
-	condition_valid_values condition_comparator condition_valid_values TK_AND condition_expression
-	|condition_valid_values condition_comparator condition_valid_values TK_OR condition_expression
-	|condition_valid_values condition_comparator condition_valid_values
-	
+	valid_condition TK_AND condition_expression
+	|valid_condition TK_OR condition_expression
+	|valid_condition
 ;
 
 conditional_if:
