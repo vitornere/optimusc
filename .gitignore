@@ -35,3 +35,4 @@
 sintatico.h 
 sintatico.c 
 lexico.c
+main.c

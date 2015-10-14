@@ -1,5 +1,4 @@
 %{
-#include <stdio.h>
 #include "sintatico.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -181,15 +180,23 @@ declarated_library:
 		if(!open_file)
 		{
             fixed_header = initial_header();
-            current_list = NULL;
             current_list = initial_list();
-//            current_list = (list*) malloc(sizeof(list));
-//            current_list -> librarys = (char*) malloc(sizeof(char)*strlen($1));
-
+            current_list -> librarys = aloc_string($1);
+            insert_elem(fixed_header, current_list);
+			fixed_header->n_elem++;
+			//printf("\n\n---Tamanho%d---\n\n",fixed_header->n_elem);
 			yyout = fopen("saida.txt", "w");
 			open_file = 1;
 		}
-
+		else {
+			current_list = NULL;
+			current_list = initial_list();
+			current_list -> librarys = aloc_string($1);
+			insert_elem(fixed_header, current_list);
+			fixed_header->n_elem++;
+			//printf("\n\n--Tamanho%d--Alocado porra 1: %s\n\nAlocado porra 2: %s",fixed_header->n_elem, fixed_header->head->librarys, fixed_header->head->next->librarys);
+			
+		}
 		fprintf(yyout, "%s\n", $1);
 	}
 ;

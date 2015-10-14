@@ -1,30 +1,7 @@
 #include "lista.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct List {
-    char *predecessor;
-    char *librarys;
-    char *type;
-    char *variable;
-    char attribution; // =
-    int value_int;
-    float value_float;
-    char *string;
-    char init_inst;
-    char end_inst;
-    char coma;
-    char init_brackets;
-    char end_brackets;
-    struct List *previous;
-    struct List *next;
-} list;
-
-typedef struct Header {
-    int n_elem;
-    struct List *head;
-    struct List *tail;
-} header;
+#include <string.h>
 
 header* initial_header() {
     header *init_header = (header*) malloc(sizeof(header));
@@ -162,4 +139,12 @@ void free_list(header *fixed_header) {
     }
 
     free(fixed_header);
+}
+
+char* aloc_string(char *string) {
+	char *new_string = (char*) malloc(sizeof(char)*strlen(string));
+	
+	strcpy(new_string, string);
+
+	return new_string;
 }
