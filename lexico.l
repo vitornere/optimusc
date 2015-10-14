@@ -126,6 +126,25 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	return(TK_ATTRIBUITION);
 }
 
+"<" {
+	printf("Lexico: Encontrado: %c", yytext[0]);
+	return(TK_COMPARISON_LT);
+}
+">" {
+	printf("Lexico: Encontrado: %c", yytext[0]);
+	return(TK_COMPARISON_GT);
+}
+
+"==" {
+	printf("Lexico: Encontrado: %c", yytext[0]);
+	return(TK_COMPARISON_ET);
+} 
+
+"!=" {
+	printf("Lexico: Encontrado: %c", yytext[0]);
+	return(TK_COMPARISON_DT);
+}
+
 %%
 
 void yyerror(char* str) {

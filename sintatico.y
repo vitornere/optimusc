@@ -29,6 +29,10 @@ char const tab[4] = "    ";
 %token TK_END_BRACKETS
 %token TK_COMA
 %token TK_ATTRIBUITION
+%token TK_COMPARISON_LT /*Less than  '<' */
+%token TK_COMPARISON_GT /*Greater than '>' */
+%token TK_COMPARISON_ET /*Equal to '==' */
+%token TK_COMPARISON_DT /*Different than '!=' */
 %token <string> TK_LIBRARY
 
 %start start
@@ -41,6 +45,10 @@ char const tab[4] = "    ";
 }
 
 %%
+
+/**********************/
+/*  Análise Sintática */
+/**********************/
 
 start:
 
@@ -176,11 +184,28 @@ return_declared_int:
 	| conditional_if
 ;
 
+condition_valid_values:
+	TK_VALUE_INT
+	|TK_VALUE_CHAR
+	|TK_VALUE_FLOAT
+	|TK_VALUE_STRING
+	|TK_VARIABLE
+;
+
+condition_comparator:
+	TK_COMPARISON_DT
+	|TK_COMPARISON_ET
+	|TK_COMPARISON_GT
+	|TK_COMPARISON_LT
+;
+
+condition_expression:
+	condition_valid_values condition_comparator condition_valid_values 
+;
+
 conditional_if:
-	TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST int_function TK_END_INST
-	{
-		printf("\n If encontrado;\n");
-	}
+	TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST start 
+	| TK_RE_IF TK_INIT_BRACKETS condition_expression TK_END_BRACKETS TK_INIT_INST start 
 	| declarated_library
 ;
 
@@ -196,6 +221,29 @@ declarated_library:
 		fprintf(yyout, "%s\n", $1);
 	}
 ;
+
+/**********************/
+/*  Análise Sintática */
+/**********************/
+
+
+/**********************/
+/*  Boas Práticas */
+/**********************/
+
+/**********************/
+/*  Análise Sintática */
+/**********************/
+
+
+/**********************/
+/*    Impressão .c    */
+/**********************/
+
+/**********************/
+/*    Impressão .c    */
+/**********************/
+
 %%
 
 int yywrap() { return 1; }
