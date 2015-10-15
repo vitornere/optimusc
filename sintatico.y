@@ -29,6 +29,11 @@ char const tab[4] = "    ";
 %token TK_COMA
 %token TK_ATTRIBUITION
 %token <string> TK_LIBRARY
+%right '='
+%left TK_PLUS
+%left TK_MINUS
+%left TK_TIMES
+%left TK_DIVI
 
 %start start
 
@@ -182,7 +187,21 @@ declarated_library:
 
 		fprintf(yyout, "%s\n", $1);
 	}
+	| expression
 ;
+
+expression:
+	TK_VALUE_INT
+	| TK_VALUE_FLOAT
+	| TK_VARIABLE
+	| expression TK_PLUS expression
+	| expression TK_MINUS expression
+	| expression TK_TIMES expression
+	| expression TK_DIVI expression
+	| TK_INIT_BRACKETS expression TK_END_BRACKETS
+	| expression TK_END_INST_LINE
+;
+
 %%
 
 int yywrap() { return 1; }
