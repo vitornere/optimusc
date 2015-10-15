@@ -12,12 +12,12 @@
 /* Expressões Regulares */
 
 
-INT         [-+]?[0-9]+
+INT         	[-+]?[0-9]+
 exponant	[eE]{INT}
-FLOAT       {INT}("."[0-9]+)?{exponant}?
-CHAR        (\').{1}(\')
-WHITESPACE  [ \t\v\f]*
-NEWLINE		[\n|\n\l|\r\n]
+FLOAT       	{INT}("."[0-9]+)?{exponant}?
+CHAR        	(\').{1}(\')
+WHITESPACE  	[ \t\v\f]*
+NEWLINE	[\n|\n\l|\r\n]
 VARIABLE	([a-zA-Z_][a-zA-Z0-9_]*)
 TYPE		(int|float|char)
 LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
@@ -54,8 +54,6 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	}
 }
 
-
-
 {INT} {
 	printf("\nLexico: Encontrado INT de valor: %d\n", atoi(yytext));
 	yylval.number_int = atoi(yytext);
@@ -72,6 +70,30 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	printf("\nLexico: Encontrado CHAR atribuido => %c", yytext[1]);
 	yylval.caracter = yytext[1];
 	return(TK_VALUE_CHAR);
+}
+
+"+" {
+	printf("\nLexico: Encontrado: +\n");
+	yylval.string = strdup(yytext);
+	return(TK_PLUS);
+}
+
+"-" {
+	printf("\nLexico: Encontrado: -\n");
+	yylval.string = strdup(yytext);
+	return(TK_MINUS);
+}
+
+"*" {
+	printf("\nLexico: Encontrado: *\n");
+	yylval.string = strdup(yytext);
+	return(TK_TIMES);
+}
+
+"/" {
+	printf("\nLexico: Encontrado: /\n");
+	yylval.string = strdup(yytext);
+	return(TK_DIVI);
 }
 
 ";"	{
