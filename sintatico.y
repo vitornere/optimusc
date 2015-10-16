@@ -31,6 +31,10 @@ char const tab[4] = "    ";
 %token TK_COMA
 %token TK_ATTRIBUITION
 %token <string> TK_LIBRARY
+%left TK_PLUS
+%left TK_MINUS
+%left TK_TIMES
+%left TK_DIVI
 
 %start start
 
@@ -89,9 +93,32 @@ int_function:
 		fprintf(yyout, "int %s() {\n", $2);
 		amount_space++;
 	}
+	| expression_final
+;
+
+expression_final:
+	expression TK_END_INST_LINE
 	| float_attribuited
 ;
 
+value:
+	TK_VALUE_INT
+	| TK_VALUE_FLOAT
+	| TK_VARIABLE
+;
+
+aritmetcs:
+	TK_PLUS
+	| TK_MINUS
+	| TK_TIMES
+	| TK_DIVI
+;
+
+expression:
+	value
+	| expression aritmetcs expression
+	| TK_INIT_BRACKETS expression TK_END_BRACKETS
+;
 
 float_attribuited:
 	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT TK_END_INST_LINE
@@ -192,6 +219,9 @@ declarated_library:
 		}
 	}
 ;
+
+
+
 %%
 
 int yywrap() { return 1; }

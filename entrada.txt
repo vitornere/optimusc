@@ -8,5 +8,8 @@ float real = 1.0;
 float realMenor;
 char b = 'b';
 char a;
+3.0 + 3.0 - 3;
+3 * (3 - a) - a / 2;
+4.5 * (4 + x) * a * z * (2 -b);
 return 0;
 }
