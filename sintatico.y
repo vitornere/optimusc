@@ -210,6 +210,7 @@ aritmetcs:
 expression:
 	value
 	| expression aritmetcs expression
+	| TK_INIT_BRACKETS expression TK_END_BRACKETS
 ;
 
 %%
