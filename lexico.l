@@ -75,25 +75,21 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 
 "+" {
 	printf("\nLexico: Encontrado: +\n");
-	yylval.string = strdup(yytext);
 	return(TK_PLUS);
 }
 
 "-" {
 	printf("\nLexico: Encontrado: -\n");
-	yylval.string = strdup(yytext);
 	return(TK_MINUS);
 }
 
 "*" {
 	printf("\nLexico: Encontrado: *\n");
-	yylval.string = strdup(yytext);
 	return(TK_TIMES);
 }
 
 "/" {
 	printf("\nLexico: Encontrado: /\n");
-	yylval.string = strdup(yytext);
 	return(TK_DIVI);
 }
 

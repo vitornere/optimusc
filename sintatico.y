@@ -31,10 +31,10 @@ char const tab[4] = "    ";
 %token TK_COMA
 %token TK_ATTRIBUITION
 %token <string> TK_LIBRARY
-%left TK_PLUS
-%left TK_MINUS
-%left TK_TIMES
-%left TK_DIVI
+%token TK_PLUS
+%token TK_MINUS
+%token TK_TIMES
+%token TK_DIVI
 
 %start start
 
