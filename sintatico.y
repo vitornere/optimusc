@@ -91,9 +91,32 @@ int_function:
 		fprintf(yyout, "int %s() {\n", $2);
 		amount_space++;
 	}
+	| expression_final
+;
+
+expression_final:
+	expression TK_END_INST_LINE
 	| float_attribuited
 ;
 
+value:
+	TK_VALUE_INT
+	| TK_VALUE_FLOAT
+	| TK_VARIABLE
+;
+
+aritmetcs:
+	TK_PLUS
+	| TK_MINUS
+	| TK_TIMES
+	| TK_DIVI
+;
+
+expression:
+	value
+	| expression aritmetcs expression
+	| TK_INIT_BRACKETS expression TK_END_BRACKETS
+;
 
 float_attribuited:
 	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT TK_END_INST_LINE
@@ -186,32 +209,9 @@ declarated_library:
 
 		fprintf(yyout, "%s\n", $1);
 	}
-	| expression_final
 ;
 
-expression_final:
-	TK_END_INST_LINE
-	| expression TK_END_INST_LINE
-;
 
-value:
-	TK_VALUE_INT
-	| TK_VALUE_FLOAT
-	| TK_VARIABLE
-;
-
-aritmetcs:
-	TK_PLUS
-	| TK_MINUS
-	| TK_TIMES
-	| TK_DIVI
-;
-
-expression:
-	value
-	| expression aritmetcs expression
-	| TK_INIT_BRACKETS expression TK_END_BRACKETS
-;
 
 %%
 
