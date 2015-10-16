@@ -29,7 +29,6 @@ char const tab[4] = "    ";
 %token TK_COMA
 %token TK_ATTRIBUITION
 %token <string> TK_LIBRARY
-%right '='
 %left TK_PLUS
 %left TK_MINUS
 %left TK_TIMES
@@ -187,19 +186,30 @@ declarated_library:
 
 		fprintf(yyout, "%s\n", $1);
 	}
-	| expression
+	| expression_final
 ;
 
-expression:
+expression_final:
+	TK_END_INST_LINE
+	| expression TK_END_INST_LINE
+;
+
+value:
 	TK_VALUE_INT
 	| TK_VALUE_FLOAT
 	| TK_VARIABLE
-	| expression TK_PLUS expression
-	| expression TK_MINUS expression
-	| expression TK_TIMES expression
-	| expression TK_DIVI expression
-	| TK_INIT_BRACKETS expression TK_END_BRACKETS
-	| expression TK_END_INST_LINE
+;
+
+aritmetcs:
+	TK_PLUS
+	| TK_MINUS
+	| TK_TIMES
+	| TK_DIVI
+;
+
+expression:
+	value
+	| expression aritmetcs expression
 ;
 
 %%
