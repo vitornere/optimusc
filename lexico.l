@@ -109,6 +109,12 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	return(TK_RE_RETURN);
 }
 
+"else" {
+	printf("\nLexico: Encontrado: else");
+	return(TK_RE_ELSE);
+}
+
+
 "if" {
 	printf("\nLexico: Encontrado: if");
 	return(TK_RE_IF);

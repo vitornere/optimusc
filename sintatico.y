@@ -16,6 +16,7 @@ char const tab[4] = "    ";
 %token TK_RE_CHAR
 %token TK_RE_STRING
 %token TK_RE_RETURN
+%token TK_RE_ELSE
 %token TK_RE_IF
 %token <number_int> TK_VALUE_INT
 %token <number_float> TK_VALUE_FLOAT
@@ -183,7 +184,7 @@ return_declared_int:
 	{
 		fprintf(yyout, "\nreturn %d;\n", $2);
 	}
-	| conditional_if
+	| conditional_elif
 ;
 
 condition_valid_values:
@@ -211,11 +212,23 @@ condition_expression:
 	|valid_condition
 ;
 
+conditional_elif:
+	TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST start 
+	| TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS condition_expression TK_END_BRACKETS TK_INIT_INST start 
+	| conditional_else 
+;
+
+conditional_else:
+	TK_RE_ELSE TK_INIT_INST start 
+	| conditional_if
+;
+
 conditional_if:
 	TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST start 
 	| TK_RE_IF TK_INIT_BRACKETS condition_expression TK_END_BRACKETS TK_INIT_INST start 
-	| declarated_library
+	| declarated_library 
 ;
+
 
 declarated_library:
 	TK_LIBRARY
