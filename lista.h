@@ -5,18 +5,13 @@
 
 typedef struct List {
     char *predecessor;
-    char *librarys;
-    char *type;
-    char *variable;
-    char attribution; // =
+    char *string;
+    char character;
     int value_int;
     float value_float;
-    char *string;
-    char init_inst;
-    char end_inst;
-    char coma;
-    char init_brackets;
-    char end_brackets;
+    char *successor;
+    int amount_space;
+
     struct List *previous;
     struct List *next;
 } list;

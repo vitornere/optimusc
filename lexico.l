@@ -190,7 +190,7 @@ void yyerror(char* str) {
 int main() {
 
 
-	if((yyin = fopen("entrada.txt", "r")) == NULL) {
+	if((yyin = fopen("entrada.c", "r")) == NULL) {
 		printf("\nErro ao abrir o arquivo!\n");
 		exit(1);
 	}
