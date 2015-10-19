@@ -10,8 +10,9 @@
 	extern FILE *yyin;
 %}
 
+/************************/
 /* Expressões Regulares */
-
+/************************/
 
 INT         	[-+]?[0-9]+
 exponant	[eE]{INT}
@@ -128,6 +129,17 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	return(TK_RE_RETURN);
 }
 
+"else" {
+	printf("\nLexico: Encontrado: else");
+	return(TK_RE_ELSE);
+}
+
+
+"if" {
+	printf("\nLexico: Encontrado: if");
+	return(TK_RE_IF);
+}
+
 {VARIABLE} {
 	printf("\nLexico: Encontrado VARIAVEL: %s\n", yytext);
 	yylval.string = (char*) malloc(sizeof(char)*strlen(yytext));
@@ -138,6 +150,35 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 "=" {
 	printf("Lexico: Encontrado: %c", yytext[0]);
 	return(TK_ATTRIBUITION);
+}
+
+"<" {
+	printf("Lexico: Encontrado: %c", yytext[0]);
+	return(TK_COMPARISON_LT);
+}
+">" {
+	printf("Lexico: Encontrado: %c", yytext[0]);
+	return(TK_COMPARISON_GT);
+}
+
+"==" {
+	printf("Lexico: Encontrado: ==");
+	return(TK_COMPARISON_ET);
+}
+
+"!=" {
+	printf("Lexico: Encontrado: !=");
+	return(TK_COMPARISON_DT);
+}
+
+"&&" {
+	printf("Lexico: Encontrado: AND");
+	return(TK_AND);
+}
+
+"||" {
+	printf("Lexico: Encontrado: OR");
+	return(TK_OR);
 }
 
 %%

@@ -18,6 +18,8 @@ char const tab[4] = "    ";
 %token TK_RE_CHAR
 %token TK_RE_STRING
 %token TK_RE_RETURN
+%token TK_RE_ELSE
+%token TK_RE_IF
 %token <number_int> TK_VALUE_INT
 %token <number_float> TK_VALUE_FLOAT
 %token <caracter> TK_VALUE_CHAR
@@ -29,7 +31,13 @@ char const tab[4] = "    ";
 %token TK_INIT_BRACKETS
 %token TK_END_BRACKETS
 %token TK_COMA
+%token TK_AND
+%token TK_OR
 %token TK_ATTRIBUITION
+%token TK_COMPARISON_LT /*Less than  '<' */
+%token TK_COMPARISON_GT /*Greater than '>' */
+%token TK_COMPARISON_ET /*Equal to '==' */
+%token TK_COMPARISON_DT /*Different than '!=' */
 %token <string> TK_LIBRARY
 %token TK_PLUS
 %token TK_MINUS
@@ -46,6 +54,10 @@ char const tab[4] = "    ";
 }
 
 %%
+
+/**********************/
+/*  Análise Sintática */
+/**********************/
 
 start:
 	TK_END_INST
@@ -97,7 +109,7 @@ int_function:
 ;
 
 expression_final:
-	expression TK_END_INST_LINE
+	TK_VARIABLE TK_ATTRIBUITION expression TK_END_INST_LINE
 	| float_attribuited
 ;
 
@@ -115,9 +127,9 @@ aritmetcs:
 ;
 
 expression:
-	value
-	| expression aritmetcs expression
-	| TK_INIT_BRACKETS expression TK_END_BRACKETS
+    TK_INIT_BRACKETS expression TK_END_BRACKETS
+    | expression aritmetcs expression
+	| value
 ;
 
 float_attribuited:
@@ -197,8 +209,43 @@ return_declared_int:
 	{
 		fprintf(yyout, "\nreturn %d;\n", $2);
 	}
+	| conditional_elif
+;
+
+condition_comparator:
+	TK_COMPARISON_DT
+	| TK_COMPARISON_ET
+	| TK_COMPARISON_GT
+	| TK_COMPARISON_LT
+;
+
+valid_condition:
+     expression condition_comparator expression
+;
+
+condition_expression:
+	valid_condition TK_AND condition_expression
+	| valid_condition TK_OR condition_expression
+	| valid_condition
+;
+
+conditional_elif:
+	TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST start
+	| TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS condition_expression TK_END_BRACKETS TK_INIT_INST start
+	| conditional_else
+;
+
+conditional_else:
+	TK_RE_ELSE TK_INIT_INST start
+	| conditional_if
+;
+
+conditional_if:
+	TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST start
+	| TK_RE_IF TK_INIT_BRACKETS condition_expression TK_END_BRACKETS TK_INIT_INST start
 	| declarated_library
 ;
+
 
 declarated_library:
 	TK_LIBRARY
@@ -220,7 +267,27 @@ declarated_library:
 	}
 ;
 
+/**********************/
+/*  Análise Sintática */
+/**********************/
 
+
+/**********************/
+/*    Boas Práticas   */
+/**********************/
+
+/**********************/
+/*    Boas Práticas   */
+/**********************/
+
+
+/**********************/
+/*    Impressão .c    */
+/**********************/
+
+/**********************/
+/*    Impressão .c    */
+/**********************/
 
 %%
 
