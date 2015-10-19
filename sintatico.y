@@ -65,7 +65,7 @@ start:
         amount_space--;
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '}';
+        current_list -> string = aloc_string("}\n");
         insert_elem(fixed_header, current_list);
 
         end_file --;
@@ -106,7 +106,7 @@ atribution_int:
 	{
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("int");
+        current_list -> string = aloc_string("int ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -116,14 +116,14 @@ atribution_int:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = ',';
+        current_list -> string = aloc_string(", ");
         insert_elem(fixed_header, current_list);
 	}
 	| TK_RE_INT TK_VARIABLE
 	{
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("int");
+        current_list -> string = aloc_string("int ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -144,7 +144,7 @@ int_function:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("int");
+        current_list -> string = aloc_string("\nint ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -166,7 +166,7 @@ int_function:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -185,7 +185,7 @@ int_function:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("int");
+        current_list -> string = aloc_string("\nint ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -205,7 +205,7 @@ int_function:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -227,7 +227,7 @@ expression_final:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '=';
+        current_list -> string = aloc_string(" = ");
         insert_elem(fixed_header, current_list);
     }
     expression TK_END_INST_LINE
@@ -269,28 +269,28 @@ aritmetcs:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '+';
+        current_list -> string = aloc_string(" + ");
         insert_elem(fixed_header, current_list);
     }
 	| TK_MINUS
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '-';
+        current_list -> string = aloc_string(" - ");
         insert_elem(fixed_header, current_list);
     }
 	| TK_TIMES
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '*';
+        current_list -> string = aloc_string(" * ");
         insert_elem(fixed_header, current_list);
     }
 	| TK_DIVI
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '/';
+        current_list -> string = aloc_string(" / ");
         insert_elem(fixed_header, current_list);
     }
 ;
@@ -325,7 +325,7 @@ float_attribuited:
 */
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("float");
+        current_list -> string = aloc_string("float ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -335,7 +335,7 @@ float_attribuited:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '=';
+        current_list -> string = aloc_string(" = ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -363,7 +363,7 @@ float_only_declarated:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("float");
+        current_list -> string = aloc_string("float ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -391,7 +391,7 @@ int_attribuited:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("int");
+        current_list -> string = aloc_string("int ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -401,7 +401,7 @@ int_attribuited:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '=';
+        current_list -> string = aloc_string(" = ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -429,7 +429,7 @@ int_only_declarated:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("int");
+        current_list -> string = aloc_string("int ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -466,7 +466,7 @@ char_attribuited:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '=';
+        current_list -> string = aloc_string(" = ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -503,7 +503,7 @@ char_only_declarated:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("char");
+        current_list -> string = aloc_string("char ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -526,7 +526,7 @@ return_declared_int:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("return");
+        current_list -> string = aloc_string("\nreturn ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -547,28 +547,28 @@ condition_comparator:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("!=");
+        current_list -> string = aloc_string(" != ");
         insert_elem(fixed_header, current_list);
     }
 	| TK_COMPARISON_ET
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("==");
+        current_list -> string = aloc_string(" == ");
         insert_elem(fixed_header, current_list);
     }
 	| TK_COMPARISON_GT
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '>';
+        current_list -> string = aloc_string(" > ");
         insert_elem(fixed_header, current_list);
     }
 	| TK_COMPARISON_LT
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '<';
+        current_list -> string = aloc_string(" < ");
         insert_elem(fixed_header, current_list);
     }
 ;
@@ -582,7 +582,7 @@ condition_expression:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("&&");
+        current_list -> string = aloc_string(" && ");
         insert_elem(fixed_header, current_list);
     }
     condition_expression
@@ -590,7 +590,7 @@ condition_expression:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("||");
+        current_list -> string = aloc_string(" || ");
         insert_elem(fixed_header, current_list);
     }
     condition_expression
@@ -602,7 +602,7 @@ conditional_elif:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("else");
+        current_list -> string = aloc_string("else ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -627,7 +627,7 @@ conditional_elif:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -638,7 +638,7 @@ conditional_elif:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("else");
+        current_list -> string = aloc_string("else ");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -660,7 +660,7 @@ conditional_elif:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -680,7 +680,7 @@ conditional_else:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -695,7 +695,7 @@ conditional_if:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("if");
+        current_list -> string = aloc_string("\nif");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -715,7 +715,7 @@ conditional_if:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -726,7 +726,7 @@ conditional_if:
     {
         current_list = NULL;
         current_list = initial_list();
-        current_list -> string = aloc_string("if");
+        current_list -> string = aloc_string("\nif");
         insert_elem(fixed_header, current_list);
 
         current_list = NULL;
@@ -743,7 +743,7 @@ conditional_if:
 
         current_list = NULL;
         current_list = initial_list();
-        current_list -> character = '{';
+        current_list -> string = aloc_string(" {\n");
         insert_elem(fixed_header, current_list);
 
         end_file++;
@@ -762,6 +762,7 @@ declarated_library:
             fixed_header = initial_header();
             current_list = initial_list();
             current_list -> string = aloc_string($1);
+            current_list -> successor = aloc_string("\n");
             insert_elem(fixed_header, current_list);
 			started_header = 1;
 		}
@@ -769,6 +770,7 @@ declarated_library:
 			current_list = NULL;
 			current_list = initial_list();
 			current_list -> string = aloc_string($1);
+            current_list -> successor = aloc_string("\n");
 			insert_elem(fixed_header, current_list);
 		}
 	}
