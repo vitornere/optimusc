@@ -26,33 +26,35 @@ list* initial_list() {
     init_list -> previous = NULL;
     init_list -> next = NULL;
     init_list -> amount_space = 0;
+    init_list -> id = 0;
 
     return init_list;
 }
 
 void insert_elem(header *fixed_header, list *new_elem) {
 
-    if(!fixed_header -> n_elem) {
+    if(!fixed_header -> n_elem)
+    {
         fixed_header -> head = new_elem;
         fixed_header -> tail = new_elem;
         new_elem -> next = new_elem -> previous = new_elem;
         fixed_header -> n_elem ++;
         printf("\nNum Elem: %d: ", fixed_header->n_elem);
         printf("\nNum Elem: %s\n", new_elem->string);
-    }
-    else {
+    } else
+    {
         new_elem -> previous = fixed_header -> tail;
         new_elem -> next = fixed_header -> head;
         fixed_header -> tail -> next = new_elem;
         fixed_header -> head -> previous = new_elem;
         fixed_header -> tail = new_elem;
         fixed_header -> n_elem ++;
-        printf("\nNum Elem: %d: \n", fixed_header->n_elem);
+        printf ("\nNum Elem: %d: \n", fixed_header->n_elem);
     }
 }
 
 void print_list(header *fixed_header, FILE *file_end) {
-    int i;
+    int i, j;
     list *aux = fixed_header -> head;
 
     for(i=0; i<fixed_header->n_elem; i++)
@@ -64,51 +66,64 @@ void print_list(header *fixed_header, FILE *file_end) {
 
         if(aux -> string)
         {
+            if(!strcmp(aux->string, "if"))
+            {
+                if(aux->previous->string)
+                {
+                    if(strcmp(aux->previous->string, "else"))
+                    {
+                        if(strcmp(aux->previous->string, "else "))
+                        {
+                            fprintf(file_end, "\n");
+                        }
+                    }
+                }
+                else
+                {
+                    fprintf(file_end, "\n");
+                }
+            }
+
             if(aux->amount_space){
-                for(i = 0; i<aux->amount_space; i++) {
-        			fprintf(file_end, "\t");
-        		}
+                    for(j = 0; j<aux->amount_space; j++)
+                    {
+                        // printf("\n\nTab: %d %d -> %s", aux->amount_space, j, aux->string);
+            			fprintf(file_end, "\t");
+            		}
             }
             fprintf(file_end, "%s", aux->string);
         }
 
-        if(aux -> character != '\0') {
-
-            if(aux->amount_space){
-                for(i = 0; i<aux->amount_space; i++) {
+        if(aux -> character != '\0')
+        {
+            if(aux->amount_space && aux->character == '{'){
+                for(j = 0; j<aux->amount_space; j++)
+                {
+                    printf("\n\nTab: %d %d -> %s", aux->amount_space, j, aux->string);
         			fprintf(file_end, "\t");
         		}
             }
 
-            if(aux->character == '{') {
+            fprintf(file_end, "%c", aux->character);
 
-            }
-            fprintf(file_end, "%c ", aux->character);
-
-            if(aux->character == ';' || aux->character == '{') {
+            if(aux->character == ';' || aux->character == '{')
+            {
                 fprintf(file_end, "\n");
             }
         }
 
-        if(aux -> value_int != -1) {
-            if(aux->amount_space){
-                for(i = 0; i<aux->amount_space; i++) {
-        			fprintf(file_end, "\t");
-        		}
-            }
+        if(aux -> value_int != -1)
+        {
             fprintf(file_end, "%d", aux->value_int);
         }
 
-        if(aux -> value_float != -1.0) {
-            if(aux->amount_space){
-                for(i = 0; i<aux->amount_space; i++) {
-        			fprintf(file_end, "\t");
-        		}
-            }
+        if(aux -> value_float != -1.0)
+        {
             fprintf(file_end, "%f", aux->value_float);
         }
+        if(aux->successor)
+        {
 
-        if(aux->successor) {
             fprintf(file_end, "%s", aux->successor);
         }
 

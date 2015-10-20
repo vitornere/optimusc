@@ -11,6 +11,7 @@ typedef struct List {
     float value_float;
     char *successor;
     int amount_space;
+    int id; // ID: 1 -> Variable
 
     struct List *previous;
     struct List *next;
