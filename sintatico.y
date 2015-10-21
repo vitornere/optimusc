@@ -242,20 +242,13 @@ expression:
 float_attribuited:
 	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT 
 	{
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("float ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"float ",amount_space);
 
 		update_list_string(fixed_header, $2);
-
 		update_list_string(fixed_header, " = ");
 
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> value_float = $4;
-        insert_elem(fixed_header, current_list);
+		update_list_float(fixed_header, $4);
+
 	}
 	float_attribuited
 	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT
@@ -263,11 +256,9 @@ float_attribuited:
 		update_list_string(fixed_header, ", ");	
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> value_float = $4;
-        insert_elem(fixed_header, current_list);
-	} 
+        
+        update_list_float(fixed_header, $4);
+	}
 	float_attribuited
 	| float_only_declarated
 ;
@@ -275,11 +266,7 @@ float_attribuited:
 float_only_declarated:
 	TK_RE_FLOAT TK_VARIABLE 
 	{
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("float ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"float ",amount_space);
 
 		update_list_string(fixed_header, $2);
 
@@ -301,11 +288,7 @@ float_only_declarated:
 int_attribuited:
 	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT TK_END_INST_LINE
 	{
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("int ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"int ",amount_space);
 
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
@@ -320,11 +303,7 @@ int_attribuited:
 int_only_declarated:
 	TK_RE_INT TK_VARIABLE TK_END_INST_LINE
 	{
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("int ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"int ",amount_space);
 
 		update_list_string(fixed_header, $2);
 
@@ -336,11 +315,7 @@ int_only_declarated:
 char_attribuited:
     TK_RE_CHAR TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR TK_END_INST_LINE
     {
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("char ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+    	update_list_string_with_space(fixed_header,"char ",amount_space);
 
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
@@ -356,11 +331,7 @@ char_attribuited:
 char_only_declarated:
     TK_RE_CHAR TK_VARIABLE TK_END_INST_LINE
     {
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("char ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"char ",amount_space);
 
 		update_list_string(fixed_header, $2);
 
@@ -372,11 +343,7 @@ char_only_declarated:
 return_declared_int:
 	TK_RE_RETURN TK_VALUE_INT TK_END_INST_LINE
 	{
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("\nreturn ");
-        current_list -> amount_space = --amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"\nreturn ",amount_space);
 
 		update_list_int(fixed_header, $2);
 
@@ -425,29 +392,19 @@ condition_expression:
 conditional_elif:
 	TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS TK_VALUE_INT TK_END_BRACKETS TK_INIT_INST
     {
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("else ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"else ",amount_space);
 
 		update_list_string(fixed_header, "if");
 
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> character = '(';
-        current_list -> id = 1;
-        insert_elem(fixed_header, current_list);
+		update_list_character(fixed_header,'(');
 
 		update_list_int(fixed_header, $4);
 
    		update_list_character(fixed_header, ')');
 
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string(" {\n");
+   		update_list_string(fixed_header, " {\n");
+
         ++amount_space;
-        insert_elem(fixed_header, current_list);
 
         end_file++;
         printf("\n\nend_file: %d\n\n", end_file);
@@ -455,29 +412,20 @@ conditional_elif:
     start
 	| TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS
     {
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("else ");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"else ",amount_space);
 
 		update_list_string(fixed_header, "if");
 
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> character = '(';
-        current_list -> id = 1;
-        insert_elem(fixed_header, current_list);
+		update_list_character(fixed_header, '(');
+
     }
     condition_expression TK_END_BRACKETS TK_INIT_INST
     {
    		update_list_character(fixed_header, ')');
 
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string(" {\n");
+		update_list_string(fixed_header, " {\n");
+
         ++amount_space;
-        insert_elem(fixed_header, current_list);
 
         end_file++;
         printf("\n\nend_file: %d\n\n", end_file);
@@ -489,17 +437,11 @@ conditional_elif:
 conditional_else:
 	TK_RE_ELSE TK_INIT_INST
     {
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string("else");
-        current_list -> amount_space = amount_space;
-        insert_elem(fixed_header, current_list);
+		update_list_string_with_space(fixed_header,"else",amount_space);
 
-        current_list = NULL;
-        current_list = initial_list();
-        current_list -> string = aloc_string(" {\n");
+		update_list_string(fixed_header," {\n");
+
         ++amount_space;
-        insert_elem(fixed_header, current_list);
 
         end_file++;
         printf("\n\nend_file: %d\n\n", end_file);

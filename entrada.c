@@ -6,7 +6,7 @@ int main(){
 	int x;
 	int y = 3;
 	float real = 1.0, yu, i = 1.00;
-	float realMenor;
+	float realMenor, sadsa, dfd;
 	char b = 'b';
 	char a;
 

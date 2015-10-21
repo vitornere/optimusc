@@ -6,7 +6,7 @@ int main() {
 	int x;
 	int y = 3;
 	float real = 1.000000, yu, i = 1.000000;
-	float realMenor;
+	float realMenor, sadsa, dfd;
 	char b = 'b';
 	char a;
 
@@ -29,6 +29,6 @@ int main() {
 	else {
 		y = 4.500000 * (4 + x) * a * z * (2 - b);
 	}
-
+	
 return 0;
 }

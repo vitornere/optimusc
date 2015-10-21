@@ -13,7 +13,7 @@ header* initial_header() {
     return init_header;
 }
 
-list *current_list;
+list *new_list;
 
 list* initial_list() {
 
@@ -156,22 +156,32 @@ char* aloc_string(char *string) {
 }
 
 void update_list_string(header *fixed_header,char *word){
-    current_list = NULL;
-    current_list = initial_list();
-    current_list -> string = aloc_string(word);
-    insert_elem(fixed_header, current_list);
+    list *new_list = initial_list();
+    new_list -> string = aloc_string(word);
+    insert_elem(fixed_header, new_list);
+}
+
+void update_list_string_with_space(header *fixed_header,char *word, int amount_space ){
+    list *new_list = initial_list();
+    new_list -> string = aloc_string(word);
+    new_list -> amount_space = amount_space;
+    insert_elem(fixed_header, new_list);
 }
 
 void update_list_character(header *fixed_header, char word){
-    current_list = NULL;
-    current_list = initial_list();
-    current_list -> character = word;
-    insert_elem(fixed_header, current_list);
+    list *new_list = initial_list();
+    new_list -> character = word;
+    insert_elem(fixed_header, new_list);
 }
 
 void update_list_int(header *fixed_header, int value){
-    current_list = NULL;
-    current_list = initial_list();
-    current_list -> value_int = value;
-    insert_elem(fixed_header, current_list);
+    list *new_list = initial_list();
+    new_list -> value_int = value;
+    insert_elem(fixed_header, new_list);
+}
+
+void update_list_float(header *fixed_header, float value){
+    list *new_list = initial_list();
+    new_list -> value_float = value;
+    insert_elem(fixed_header, new_list);
 }
