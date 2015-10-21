@@ -240,7 +240,7 @@ expression:
 ;
 
 float_attribuited:
-	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT TK_END_INST_LINE
+	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT 
 	{
         current_list = NULL;
         current_list = initial_list();
@@ -256,14 +256,24 @@ float_attribuited:
         current_list = initial_list();
         current_list -> value_float = $4;
         insert_elem(fixed_header, current_list);
-
-   		update_list_character(fixed_header, ';');
 	}
+	float_attribuited
+	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT
+	{
+		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, $2);
+		update_list_string(fixed_header, " = ");
+        current_list = NULL;
+        current_list = initial_list();
+        current_list -> value_float = $4;
+        insert_elem(fixed_header, current_list);
+	} 
+	float_attribuited
 	| float_only_declarated
 ;
 
 float_only_declarated:
-	TK_RE_FLOAT TK_VARIABLE TK_END_INST_LINE
+	TK_RE_FLOAT TK_VARIABLE 
 	{
         current_list = NULL;
         current_list = initial_list();
@@ -273,7 +283,17 @@ float_only_declarated:
 
 		update_list_string(fixed_header, $2);
 
-   		update_list_character(fixed_header, ';');
+	}
+	float_attribuited
+	| TK_COMA TK_VARIABLE
+	{
+		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, $2);
+	} 
+	float_attribuited
+	| TK_END_INST_LINE
+	{
+		update_list_character(fixed_header, ';');
 	}
 	| int_attribuited
 ;
