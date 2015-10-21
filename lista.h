@@ -35,4 +35,10 @@ void free_list(header *fixed_header);
 
 char* aloc_string(char *string);
 
+void update_list_string(header *fixed_header, char *word);
+
+void update_list_character(header *fixed_header, char word);
+
+void update_list_int(header *fixed_header, int value);
+
 #endif

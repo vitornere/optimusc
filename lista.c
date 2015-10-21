@@ -13,6 +13,8 @@ header* initial_header() {
     return init_header;
 }
 
+list *current_list;
+
 list* initial_list() {
 
     list *init_list = (list*) malloc(sizeof(list));
@@ -151,4 +153,25 @@ char* aloc_string(char *string) {
 	strcpy(new_string, string);
 
 	return new_string;
+}
+
+void update_list_string(header *fixed_header,char *word){
+    current_list = NULL;
+    current_list = initial_list();
+    current_list -> string = aloc_string(word);
+    insert_elem(fixed_header, current_list);
+}
+
+void update_list_character(header *fixed_header, char word){
+    current_list = NULL;
+    current_list = initial_list();
+    current_list -> character = word;
+    insert_elem(fixed_header, current_list);
+}
+
+void update_list_int(header *fixed_header, int value){
+    current_list = NULL;
+    current_list = initial_list();
+    current_list -> value_int = value;
+    insert_elem(fixed_header, current_list);
 }
