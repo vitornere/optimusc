@@ -3,11 +3,11 @@
 
 int main(){
 
-	int x;
+	int x, testeRecursivo, denovo = 10;
 	int y = 3;
 	float real = 1.0, yu, i = 1.00;
 	float realMenor, outro, again;
-	char b = 'b';
+	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
 	char a;
 
 	if(0) {
