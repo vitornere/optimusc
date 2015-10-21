@@ -174,14 +174,35 @@ void update_list_character(header *fixed_header, char word){
     insert_elem(fixed_header, new_list);
 }
 
+void update_list_character_with_space(header *fixed_header,char word, int amount_space ){
+    list *new_list = initial_list();
+    new_list -> character =word;
+    new_list -> amount_space = amount_space;
+    insert_elem(fixed_header, new_list);
+}
+
 void update_list_int(header *fixed_header, int value){
     list *new_list = initial_list();
     new_list -> value_int = value;
     insert_elem(fixed_header, new_list);
 }
 
+void update_list_int_with_space(header *fixed_header,int value, int amount_space ){
+    list *new_list = initial_list();
+    new_list -> value_int = value;
+    new_list -> amount_space = amount_space;
+    insert_elem(fixed_header, new_list);
+}
+
 void update_list_float(header *fixed_header, float value){
     list *new_list = initial_list();
     new_list -> value_float = value;
+    insert_elem(fixed_header, new_list);
+}
+
+void update_list_float_with_space(header *fixed_header,float value, int amount_space ){
+    list *new_list = initial_list();
+    new_list -> value_float = value;
+    new_list -> amount_space = amount_space;
     insert_elem(fixed_header, new_list);
 }

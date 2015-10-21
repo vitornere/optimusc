@@ -36,13 +36,15 @@ void free_list(header *fixed_header);
 char* aloc_string(char *string);
 
 void update_list_string_with_space(header *fixed_header, char *word, int amount_space );
-
 void update_list_string(header *fixed_header, char *word);
 
+void update_list_character_with_space(header *fixed_header,char word, int amount_space );
 void update_list_character(header *fixed_header, char word);
 
 void update_list_int(header *fixed_header, int value);
+void update_list_int_with_space(header *fixed_header,int value, int amount_space );
 
+void update_list_float_with_space(header *fixed_header,float value, int amount_space );
 void update_list_float(header *fixed_header, float value);
 
 #endif
