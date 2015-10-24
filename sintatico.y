@@ -253,55 +253,87 @@ float_only_declarated:
 ;
 
 int_attribuited:
-	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT TK_END_INST_LINE
+	TK_RE_INT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT
 	{
 		update_list_string_with_space(fixed_header,"int ",amount_space);
-
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
-
 		update_list_int(fixed_header, $4);
-
-   		update_list_character(fixed_header, ';');
 	}
+	int_attribuited
+	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT
+	{
+		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, $2);
+		update_list_string(fixed_header, " = ");
+		update_list_int(fixed_header, $4);
+	}
+	int_attribuited
 	| int_only_declarated
 ;
 
 int_only_declarated:
-	TK_RE_INT TK_VARIABLE TK_END_INST_LINE
+	TK_RE_INT TK_VARIABLE
 	{
 		update_list_string_with_space(fixed_header,"int ",amount_space);
 
 		update_list_string(fixed_header, $2);
-
-   		update_list_character(fixed_header, ';');
+	}
+	int_attribuited
+	| TK_COMA TK_VARIABLE
+	{
+		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, $2);
+	} 
+	int_attribuited
+	| TK_END_INST_LINE
+	{
+		update_list_character(fixed_header, ';');
 	}
 	| char_attribuited
 ;
 
 char_attribuited:
-    TK_RE_CHAR TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR TK_END_INST_LINE
+    TK_RE_CHAR TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR 
     {
     	update_list_string_with_space(fixed_header,"char ",amount_space);
-
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
 
    		update_list_character(fixed_header, '\'');
    		update_list_character(fixed_header, $4);
    		update_list_character(fixed_header, '\'');
-   		update_list_character(fixed_header, ';');
+	}
+	char_attribuited
+	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR 
+	{
+		update_list_string(fixed_header, ", ");
+		update_list_string(fixed_header, $2);
+		update_list_string(fixed_header, " = ");
+
+   		update_list_character(fixed_header, '\'');
+   		update_list_character(fixed_header, $4);
+   		update_list_character(fixed_header, '\'');
 	}
     | char_only_declarated
 ;
 
 char_only_declarated:
-    TK_RE_CHAR TK_VARIABLE TK_END_INST_LINE
+    TK_RE_CHAR TK_VARIABLE
     {
 		update_list_string_with_space(fixed_header,"char ",amount_space);
 
 		update_list_string(fixed_header, $2);
-
+	}
+	char_attribuited
+	| TK_COMA TK_VARIABLE
+	{
+		update_list_string(fixed_header, ", ");
+		update_list_string(fixed_header, $2);
+	}
+	char_attribuited
+	| TK_END_INST_LINE
+	{
    		update_list_character(fixed_header, ';');
 	}
 	| return_declared_int
