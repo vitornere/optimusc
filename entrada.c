@@ -6,6 +6,7 @@ int main(){
 	int x, testeRecursivo, denovo = 10;
 	int y = 3;
 	float real = 1.0, yu, i = 1.00;
+	int teste;
 	float realMenor, outro, again;
 	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
 	char a;

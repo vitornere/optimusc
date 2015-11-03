@@ -4,7 +4,7 @@ comp: lexico.l sintatico.y
 	mv sintatico.tab.c sintatico.c
 	flex lexico.l
 	mv lex.yy.c lexico.c
-	gcc -o optimus.exe sintatico.c lexico.c lista.c
+	gcc -o optimus.exe sintatico.c lexico.c lista.c otimizador.c
 
 clean:
 	rm -f *~ sintatico.h sintatico.c lexico.c

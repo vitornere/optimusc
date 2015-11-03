@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lista.h"
+#include "otimizador.h"
 
 extern FILE* yyout;
 header *fixed_header;
@@ -71,6 +72,8 @@ start:
             /**********************/
             /*    Boas Práticas   */
             /**********************/
+
+                    optimize(fixed_header);
 
             /**********************/
             /*    Boas Práticas   */
@@ -207,7 +210,7 @@ expression:
 ;
 
 float_attribuited:
-	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT 
+	TK_RE_FLOAT TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT
 	{
 		update_list_string_with_space(fixed_header,"float ",amount_space);
 
@@ -220,10 +223,10 @@ float_attribuited:
 	float_attribuited
 	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_FLOAT
 	{
-		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, ", ");
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
-        
+
         update_list_float(fixed_header, $4);
 	}
 	float_attribuited
@@ -231,7 +234,7 @@ float_attribuited:
 ;
 
 float_only_declarated:
-	TK_RE_FLOAT TK_VARIABLE 
+	TK_RE_FLOAT TK_VARIABLE
 	{
 		update_list_string_with_space(fixed_header,"float ",amount_space);
 
@@ -241,9 +244,9 @@ float_only_declarated:
 	float_attribuited
 	| TK_COMA TK_VARIABLE
 	{
-		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, ", ");
 		update_list_string(fixed_header, $2);
-	} 
+	}
 	float_attribuited
 	| TK_END_INST_LINE
 	{
@@ -263,7 +266,7 @@ int_attribuited:
 	int_attribuited
 	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_INT
 	{
-		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, ", ");
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, " = ");
 		update_list_int(fixed_header, $4);
@@ -282,9 +285,9 @@ int_only_declarated:
 	int_attribuited
 	| TK_COMA TK_VARIABLE
 	{
-		update_list_string(fixed_header, ", ");	
+		update_list_string(fixed_header, ", ");
 		update_list_string(fixed_header, $2);
-	} 
+	}
 	int_attribuited
 	| TK_END_INST_LINE
 	{
@@ -294,7 +297,7 @@ int_only_declarated:
 ;
 
 char_attribuited:
-    TK_RE_CHAR TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR 
+    TK_RE_CHAR TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR
     {
     	update_list_string_with_space(fixed_header,"char ",amount_space);
 		update_list_string(fixed_header, $2);
@@ -305,7 +308,7 @@ char_attribuited:
    		update_list_character(fixed_header, '\'');
 	}
 	char_attribuited
-	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR 
+	| TK_COMA TK_VARIABLE TK_ATTRIBUITION TK_VALUE_CHAR
 	{
 		update_list_string(fixed_header, ", ");
 		update_list_string(fixed_header, $2);
