@@ -61,11 +61,6 @@ void print_list(header *fixed_header, FILE *file_end) {
 
     for(i=0; i<fixed_header->n_elem; i++)
     {
-        if(aux -> predecessor)
-        {
-            fprintf(file_end, "%s", aux->predecessor);
-        }
-
         if(aux -> string)
         {
             if(!strcmp(aux->string, "if"))
@@ -84,6 +79,11 @@ void print_list(header *fixed_header, FILE *file_end) {
                 {
                     fprintf(file_end, "\n");
                 }
+            }
+
+            if(aux -> predecessor)
+            {
+                fprintf(file_end, "%s", aux->predecessor);
             }
 
             if(aux->amount_space){
@@ -107,11 +107,6 @@ void print_list(header *fixed_header, FILE *file_end) {
             }
 
             fprintf(file_end, "%c", aux->character);
-
-            if(aux->character == ';' || aux->character == '{')
-            {
-                fprintf(file_end, "\n");
-            }
         }
 
         if(aux -> value_int != -1)
@@ -127,6 +122,11 @@ void print_list(header *fixed_header, FILE *file_end) {
         {
 
             fprintf(file_end, "%s", aux->successor);
+        }
+
+        if(aux->character == ';' || aux->character == '{')
+        {
+            fprintf(file_end, "\n");
         }
 
         aux = aux -> next;

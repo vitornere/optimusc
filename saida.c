@@ -6,6 +6,8 @@ int main() {
 	int x, testeRecursivo, denovo = 10;
 	int y = 3;
 	float real = 1.000000, yu, i = 1.000000;
+//	int teste; // Variável não utilizada
+//	char d = 'k'; // Variável não utilizada
 	float realMenor, outro, again;
 	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
 	char a;
@@ -13,11 +15,11 @@ int main() {
 	if(0) {
 		int x = 1;
 		int y = 2;
-		float bolinha;
+//		float bolinha; // Variável não utilizada
 	}
 
 	if(x > 5) {
-		int c = 3;
+//		int c = 3; // Variável não utilizada
 	}
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
