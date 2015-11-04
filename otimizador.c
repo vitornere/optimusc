@@ -11,7 +11,14 @@ int how_many_times(header *fixed_header, list *variable) {
     for(i = 0; i<fixed_header->n_elem; i++) {
         if(aux_list && aux_list->string) {
             if(!strcmp(aux_list->string, variable->string)) {
-                more_one++;
+                if(aux_list->next->string) {
+                    if(!more_one) {
+                        more_one++;
+                    }
+                    if(strcmp(aux_list->next->string, " = ")) {
+                        more_one++;
+                    }
+                }
             }
         }
 

@@ -11,11 +11,12 @@ int main(){
 	float realMenor, outro, again;
 	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
 	char a;
+	float bolinha = 3.0;
 
 	if(0) {
-		int x = 1;
-		int y = 2;
-		float bolinha;
+		x = 1;
+		bolinha = 5;
+		y = 2;
 	}
 
 	if(x>5) {
