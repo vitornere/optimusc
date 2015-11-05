@@ -35,7 +35,7 @@ void variable_not_declarated(list *in_element, header *fixed_header) {
     if(variable->previous->string) {
         if(strcmp(variable->previous->string, ", ") && variable->next->character == ';') {
             more_one = how_many_times(fixed_header, variable);
-            if(more_one == 1) {
+            if(more_one <= 1) {
                 variable->previous->predecessor = aloc_string("//");
 
                 variable->next->successor = aloc_string(" // Variável não utilizada");
@@ -44,7 +44,7 @@ void variable_not_declarated(list *in_element, header *fixed_header) {
         else if(variable->next->string) {
             if(strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string, " = ")) {
                 more_one = how_many_times(fixed_header, variable);
-                if(more_one == 1) {
+                if(more_one <= 1) {
                     if(variable->next->next->character == '\'' && variable->next->next->next->next->next->character == ';') {
                         variable->previous->predecessor = aloc_string("//");
 
