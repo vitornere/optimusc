@@ -41,8 +41,8 @@ void insert_elem(header *fixed_header, list *new_elem) {
         fixed_header -> tail = new_elem;
         new_elem -> next = new_elem -> previous = new_elem;
         fixed_header -> n_elem ++;
-        printf("\nNum Elem: %d: ", fixed_header->n_elem);
-        printf("\nNum Elem: %s\n", new_elem->string);
+        if(new_elem->string)
+            printf("Num Elem -> %d: %s\n", fixed_header->n_elem, new_elem->string);
     } else
     {
         new_elem -> previous = fixed_header -> tail;
@@ -51,7 +51,8 @@ void insert_elem(header *fixed_header, list *new_elem) {
         fixed_header -> head -> previous = new_elem;
         fixed_header -> tail = new_elem;
         fixed_header -> n_elem ++;
-        printf ("\nNum Elem: %d: \n", fixed_header->n_elem);
+        if(new_elem->string)
+            printf("Num Elem -> %d: %s\n", fixed_header->n_elem, new_elem->string);
     }
 }
 
@@ -101,7 +102,6 @@ void print_list(header *fixed_header, FILE *file_end) {
             if(aux->amount_space && aux->character == '{'){
                 for(j = 0; j<aux->amount_space; j++)
                 {
-                    printf("\n\nTab: %d %d -> %s", aux->amount_space, j, aux->string);
         			fprintf(file_end, "\t");
         		}
             }

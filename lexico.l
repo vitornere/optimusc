@@ -181,6 +181,10 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	return(TK_OR);
 }
 
+<<EOF>> {
+	return(END);
+}
+
 %%
 
 void yyerror(char* str) {

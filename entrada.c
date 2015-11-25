@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
 
+int seila() {
+	int dois;
+
+	return 0;
+}
+
+int everdade() {
+	int dois;
+
+	return 0;
+}
+
 int main(){
 
 	int x, testeRecursivo, denovo = 10;
