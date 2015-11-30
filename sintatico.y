@@ -63,7 +63,7 @@ int amount_space = 0, i, started_header = 0;
 start:
 	END
 	{
-		/**********************/
+			/**********************/
             /*    Boas Práticas   */
             /**********************/
 
@@ -101,21 +101,19 @@ start:
 ;
 
 atribution_int:
-	TK_RE_INT  TK_VARIABLE TK_COMA atribution_int
+	types TK_VARIABLE TK_COMA atribution_int
 	{
-		update_list_string(fixed_header, "int");
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, ", ");
 	}
-	| TK_RE_INT TK_VARIABLE
+	| types TK_VARIABLE
 	{
-		update_list_string(fixed_header, "int ");
 		update_list_string(fixed_header, $2);
 	}
 ;
 
 int_function:
-	TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS
+	types TK_VARIABLE TK_INIT_BRACKETS
 	{
 		update_list_string_with_space(fixed_header, "\nint ",amount_space);
 		update_list_string(fixed_header, $2);
@@ -128,7 +126,7 @@ int_function:
 
         ++amount_space;
 	}
-	| TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	| types TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
 	{
 		update_list_string_with_space(fixed_header,"\nint ", amount_space);
 		update_list_string(fixed_header, $2);
@@ -141,6 +139,24 @@ int_function:
         ++amount_space;
 	}
 	| expression_final
+;
+
+types:
+	TK_RE_INT
+	{
+		printf("\nbla\n");
+		update_list_string(fixed_header, "int");
+	}
+	|
+	TK_RE_FLOAT
+	{
+		update_list_string(fixed_header, "float");
+	}
+	|
+	TK_RE_CHAR
+	{
+		update_list_string(fixed_header, "float");
+	}
 ;
 
 expression_final:
