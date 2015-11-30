@@ -100,33 +100,108 @@ start:
 	| int_function start
 ;
 
-atribution_int:
-	types TK_VARIABLE TK_COMA atribution_int
+variable_types:
+	TK_RE_INT
+	{
+		printf("entrou no 'types' \n");
+		update_list_string(fixed_header, "int");
+	}
+	| TK_RE_FLOAT
+	{
+		update_list_string(fixed_header, "float");
+	}
+	| TK_RE_CHAR
+	{
+		update_list_string(fixed_header, "float");
+	}
+;
+atributions:
+	variable_types TK_VARIABLE TK_COMA atributions
 	{
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, ", ");
 	}
-	| types TK_VARIABLE
+	| variable_types TK_VARIABLE
 	{
 		update_list_string(fixed_header, $2);
 	}
 ;
 
 int_function:
-	types TK_VARIABLE TK_INIT_BRACKETS
+	TK_RE_INT  TK_VARIABLE TK_INIT_BRACKETS
 	{
+		printf("entrou no 'functions' \n");
 		update_list_string_with_space(fixed_header, "\nint ",amount_space);
 		update_list_string(fixed_header, $2);
 		update_list_character(fixed_header, '(');
 	}
-	atribution_int TK_END_BRACKETS TK_INIT_INST
+	atributions TK_END_BRACKETS TK_INIT_INST
 	{
 		update_list_character(fixed_header, ')');
 		update_list_string(fixed_header," {\n\n");
 
         ++amount_space;
 	}
-	| types TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	| TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_string_with_space(fixed_header,"\nint ", amount_space);
+		update_list_string(fixed_header, $2);
+
+		update_list_character(fixed_header, '(');
+		update_list_character(fixed_header, ')');
+
+		update_list_string(fixed_header, " {\n\n");
+
+        ++amount_space;
+	}
+	| float_function
+;
+
+float_function:
+	TK_RE_FLOAT  TK_VARIABLE TK_INIT_BRACKETS
+	{
+		printf("entrou no 'functions' \n");
+		update_list_string_with_space(fixed_header, "\nint ",amount_space);
+		update_list_string(fixed_header, $2);
+		update_list_character(fixed_header, '(');
+	}
+	atributions TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_character(fixed_header, ')');
+		update_list_string(fixed_header," {\n\n");
+
+        ++amount_space;
+	}
+	| TK_RE_FLOAT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_string_with_space(fixed_header,"\nint ", amount_space);
+		update_list_string(fixed_header, $2);
+
+		update_list_character(fixed_header, '(');
+		update_list_character(fixed_header, ')');
+
+		update_list_string(fixed_header, " {\n\n");
+
+        ++amount_space;
+	}
+	| char_function
+;
+
+char_function:
+	TK_RE_CHAR TK_VARIABLE TK_INIT_BRACKETS
+	{
+		update_list_string_with_space(fixed_header, "\nint ",amount_space);
+		update_list_string(fixed_header, $2);
+		update_list_character(fixed_header, '(');
+	}
+	atributions TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_character(fixed_header, ')');
+		update_list_string(fixed_header," {\n\n");
+
+        ++amount_space;
+	}
+	| TK_RE_CHAR TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
 	{
 		update_list_string_with_space(fixed_header,"\nint ", amount_space);
 		update_list_string(fixed_header, $2);
@@ -140,25 +215,6 @@ int_function:
 	}
 	| expression_final
 ;
-
-types:
-	TK_RE_INT
-	{
-		printf("\nbla\n");
-		update_list_string(fixed_header, "int");
-	}
-	|
-	TK_RE_FLOAT
-	{
-		update_list_string(fixed_header, "float");
-	}
-	|
-	TK_RE_CHAR
-	{
-		update_list_string(fixed_header, "float");
-	}
-;
-
 expression_final:
 	TK_VARIABLE TK_ATTRIBUITION
     {
