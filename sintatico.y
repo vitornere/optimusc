@@ -262,6 +262,13 @@ function_declared:
 		update_list_character(fixed_header, ')');
 		update_list_character(fixed_header, ';');
 	}
+	|TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_END_INST_LINE
+	{
+		update_list_string_with_space(fixed_header, $1, amount_space);
+		update_list_character(fixed_header, '(');
+		update_list_character(fixed_header, ')');
+		update_list_character(fixed_header, ';');
+	}
 	| float_attribuited
 ;
 
