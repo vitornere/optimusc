@@ -1,29 +1,20 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
 
-int seila() {
+float teste(int x, char c) {
 
-//	int dois; // Variável não utilizada
-	
-return 0;
-}
-
-int everdade() {
-
-//	int dois; // Variável não utilizada
-	
-return 0;
+//	char oi; // Variável não utilizada
 }
 
 int main() {
 
-	int x, testeRecursivo, denovo = 10;
+	int x, /* testeRecursivo, */ denovo = 10; // Variável não utilizada
 	int y = 3;
-	float real = 1.000000, yu, i = 1.000000;
+	float real = 1.000000, /* yu, */ i = 1.000000; // Variável não utilizada
 //	int teste; // Variável não utilizada
 //	char d = 'k'; // Variável não utilizada
-	float realMenor, outro, again;
-	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
+	float realMenor, /* outro, */ again; // Variável não utilizada
+	char b = 'b', /* testeRecursivoChar, */ testeRecursivoCharAgain; // Variável não utilizada
 	char a;
 //	float bolinha = 3.000000; // Variável não utilizada
 
