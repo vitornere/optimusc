@@ -130,7 +130,6 @@ atributions:
 int_function:
 	TK_RE_INT  TK_VARIABLE TK_INIT_BRACKETS
 	{
-		printf("entrou no 'functions' \n");
 		update_list_string_with_space(fixed_header, "\nint ",amount_space);
 		update_list_string(fixed_header, $2);
 		update_list_character(fixed_header, '(');
@@ -160,7 +159,6 @@ int_function:
 float_function:
 	TK_RE_FLOAT  TK_VARIABLE TK_INIT_BRACKETS
 	{
-		printf("entrou no 'functions' \n");
 		update_list_string_with_space(fixed_header, "\nfloat ",amount_space);
 		update_list_string(fixed_header, $2);
 		update_list_character(fixed_header, '(');
@@ -225,7 +223,17 @@ expression_final:
     {
    		update_list_character(fixed_header, ';');
     }
-	| float_attribuited
+	| function_declared
+;
+
+value_atriibuted:
+	value TK_COMA
+	{
+		update_list_string(fixed_header, ", ");
+	} 
+	value_atriibuted
+	| value
+
 ;
 
 value:
@@ -241,6 +249,20 @@ value:
     {
 		update_list_string(fixed_header, $1);
     }
+;
+
+function_declared:
+	TK_VARIABLE TK_INIT_BRACKETS
+	{
+		update_list_string_with_space(fixed_header, $1, amount_space);
+		update_list_character(fixed_header, '(');
+	}
+	value_atriibuted TK_END_BRACKETS TK_END_INST_LINE
+	{
+		update_list_character(fixed_header, ')');
+		update_list_character(fixed_header, ';');
+	}
+	| float_attribuited
 ;
 
 aritmetcs:
