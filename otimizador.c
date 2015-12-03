@@ -11,17 +11,9 @@ int how_many_times(header *fixed_header, list *variable) {
     for(i = 0; i<fixed_header->n_elem; i++) {
         if(aux_list && aux_list->string) {
             if(!strcmp(aux_list->string, variable->string)) {
-                if(aux_list->next->string) {
-                    if(!more_one) {
                         more_one++;
-                    }
-                    else if(strcmp(aux_list->next->string, " = ")) {
-                        more_one++;
-                    }
                 }
             }
-        }
-
         aux_list = aux_list->next;
     }
 
@@ -70,9 +62,9 @@ void variable_not_declarated_middle(list *in_element, header *fixed_header) {
             more_one = how_many_times(fixed_header, variable);
 
             if(more_one <= 1) {
-                variable->previous->predecessor = aloc_string("/* ----");
+                variable->previous->predecessor = aloc_string("/* ");
 
-                variable->successor = aloc_string("in midle----*/ ");
+                variable->successor = aloc_string(" */ ");
 
                 aux_list = variable;
                 
@@ -95,10 +87,19 @@ void variable_not_declarated_tail(list *in_element, header *fixed_header) {
         if(!strcmp(variable->previous->string, ", ") && variable->next->character == ';') {
             more_one = how_many_times(fixed_header, variable);
 
+            printf("--------%d-------\n",more_one );
             if(more_one <= 1) {
                 variable->previous->predecessor = aloc_string("/* ");
 
                 variable->successor = aloc_string(" */ ");
+
+                aux_list = variable;
+                
+                while(aux_list->character != ';') {
+                    aux_list = aux_list->next;
+                }
+
+                aux_list->successor = aloc_string(" // Variável não utilizada");
             }
         } 
     }
