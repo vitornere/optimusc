@@ -8,13 +8,13 @@ float teste(int x, char c) {
 
 int main() {
 
-	int x, /* testeRecursivo, */ denovo = 10; // Variável não utilizada
+	int x/* ----, testeRecursivoin midle----*/ , denovo = 10; // Variável não utilizada
 	int y = 3;
-	float real = 1.000000, /* yu, */ i = 1.000000; // Variável não utilizada
+	float real = 1.000000/* ----, yuin midle----*/ , i = 1.000000; // Variável não utilizada
 //	int teste; // Variável não utilizada
 //	char d = 'k'; // Variável não utilizada
-	float realMenor, /* outro, */ again; // Variável não utilizada
-	char b = 'b', /* testeRecursivoChar, */ testeRecursivoCharAgain; // Variável não utilizada
+	float realMenor/* ----, outroin midle----*/ /* , again */ ; // Variável não utilizada
+	char b = 'b'/* ----, testeRecursivoCharin midle----*/ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
 	char a;
 //	float bolinha = 3.000000; // Variável não utilizada
 
@@ -35,7 +35,7 @@ int main() {
 		x = 3 * (3 - a) - a / 2;
 	}
 	else {
-		y = 4.500000 * (4 + x) * a * z * (2 - b);
+		testeRecursivoChar = 4.500000 * (4 + x) * a * z * (2 - b);
 	}
 	
 return 0;

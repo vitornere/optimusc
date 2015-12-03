@@ -11,7 +11,7 @@ int main(){
 	float real = 1.0, yu, i = 1.00;
 	int teste;
 	char d = 'k';
-	float realMenor,  outro, again;
+	float realMenor, outro, again;
 	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
 	char a;
 	float bolinha = 3.0;
@@ -33,7 +33,7 @@ int main(){
 		x = 3 * (3 - a) - a / 2;
 	}
 	else {
-		y = 4.5 * (4 + x) * a * z * (2 -b);
+		testeRecursivoChar = 4.5 * (4 + x) * a * z * (2 -b);
 	}
 
 	return 0;
