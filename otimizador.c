@@ -15,7 +15,7 @@ int how_many_times(header *fixed_header, list *variable) {
                     if(!more_one) {
                         more_one++;
                     }
-                    if(strcmp(aux_list->next->string, " = ")) {
+                    else if(strcmp(aux_list->next->string, " = ")) {
                         more_one++;
                     }
                 }
@@ -68,7 +68,7 @@ void variable_not_declarated_middle(list *in_element, header *fixed_header) {
     if(variable->previous->string && variable->next->string) {
         if(!strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string,", ")) {
             more_one = how_many_times(fixed_header, variable);
-            more_one --;
+
             if(more_one <= 1) {
                 variable->predecessor = aloc_string("/* ");
 
