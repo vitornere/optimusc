@@ -8,9 +8,9 @@ float teste(int x, char c) {
 
 int main() {
 
-	int x, nUtilAtribuida = 10;
+	int x/* , nUtilAtribuida = 10 */ ; // Variável não utilizada
 	int y = 3/* , yy */ ; // Variável não utilizada
-	float real = 1.000000/* 1111, yu 1111*/ , i = 1.000000; // Variável não utilizada
+	float real = 1.000000/* 1111, yu 1111*/ /* , i = 1.000000 */ ; // Variável não utilizada
 //	int testeNutil; // Variável não utilizada
 //	char d = 'k'; // Variável não utilizada
 	float /*-- realMenor----*//* 1111, outro 1111*/ , floatUtil, nUtilFloat; // Variável não utilizada
