@@ -6,14 +6,14 @@ float teste(int x, char c){
 
 int main(){
 
-	int x, nUtilizadaInt, nUtilAtribuida = 10;
-	int y = 3;
+	int x, nUtilAtribuida = 10;
+	int y = 3, yy;
 	float real = 1.0, yu, i = 1.00;
 	int testeNutil;
 	char d = 'k';
 	float realMenor, outro, floatUtil, nUtilFloat;
 	char b = 'b', utilizada, testeRecursivoCharAgain;
-	char a;
+	char a, mamada;
 	float bolinha = 3.0;
 
 	if(0) {
