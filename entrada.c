@@ -6,14 +6,14 @@ float teste(int x, char c){
 
 int main(){
 
-	int x, testeRecursivo, denovo = 10;
-	int y = 3;
+	int x, nUtilAtribuida = 10;
+	int y = 3, yy;
 	float real = 1.0, yu, i = 1.00;
-	int teste;
+	int testeNutil;
 	char d = 'k';
-	float realMenor, outro, again;
-	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
-	char a;
+	float realMenor, outro, floatUtil, nUtilFloat;
+	char b = 'b', utilizada, testeRecursivoCharAgain;
+	char a, mamada;
 	float bolinha = 3.0;
 
 	if(0) {
@@ -27,13 +27,16 @@ int main(){
 	}
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
-		real = 3.0 + 3.0 - 3;
+		floatUtil = 3.0 + 3.0 - 3;
+		floatUtil = real + floatUtil;
 	}
 	else if (x > 3 || (x + 23) != y){
 		x = 3 * (3 - a) - a / 2;
+		
 	}
 	else {
-		y = 4.5 * (4 + x) * a * z * (2 -b);
+		nUtilFloat = 4.5 * (4 + x) * a * (2 -b);
+		
 	}
 
 	return 0;

@@ -1,31 +1,22 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
 
-int seila() {
+float teste(int x, char c) {
 
-//	int dois; // Variável não utilizada
-	
-return 0;
-}
-
-int everdade() {
-
-//	int dois; // Variável não utilizada
-	
-return 0;
+//	char oi; // Variável não utilizada
 }
 
 int main() {
 
-	int x, testeRecursivo, denovo = 10;
-	int y = 3;
-	float real = 1.000000, yu, i = 1.000000;
-//	int teste; // Variável não utilizada
+	int x, nUtilAtribuida = 10;
+	int y = 3/* , yy */ ; // Variável não utilizada
+	float real = 1.000000/* 1111, yu 1111*/ , i = 1.000000; // Variável não utilizada
+//	int testeNutil; // Variável não utilizada
 //	char d = 'k'; // Variável não utilizada
-	float realMenor, outro, again;
-	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
-	char a;
-//	float bolinha = 3.000000; // Variável não utilizada
+	float /*-- realMenor----*//* 1111, outro 1111*/ , floatUtil, nUtilFloat; // Variável não utilizada
+	char b = 'b'/* 1111, utilizada 1111*/ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
+	char a/* , mamada */ ; // Variável não utilizada
+	float bolinha = 3.000000;
 
 	if(0) {
 		x = 1;
@@ -34,17 +25,18 @@ int main() {
 	}
 
 	if(x > 5) {
-//		int c = 3; // Variável não utilizada
+		int c = 3;
 	}
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
-		real = 3.000000 + 3.000000 - 3;
+		floatUtil = 3.000000 + 3.000000 - 3;
+		floatUtil = real + floatUtil;
 	}
 	else if(x > 3 || (x + 23) != y) {
 		x = 3 * (3 - a) - a / 2;
 	}
 	else {
-		y = 4.500000 * (4 + x) * a * z * (2 - b);
+		nUtilFloat = 4.500000 * (4 + x) * a * (2 - b);
 	}
 	
 return 0;
