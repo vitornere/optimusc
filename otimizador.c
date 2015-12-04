@@ -24,18 +24,15 @@ int how_many_times(header *fixed_header, list *variable) {
 void variable_not_declarated_alone(list *in_element, header *fixed_header) {
     int more_one = 0;
     list *variable = in_element, *aux_list = fixed_header->head;
-    if(strcmp(variable->previous->string, ", ") && variable->next->character == ';') {
-        more_one = how_many_times(fixed_header, variable);
-        if(more_one <= 1) {
+    more_one = how_many_times(fixed_header, variable);
+    if(more_one <= 1) {
+        if(strcmp(variable->previous->string, ", ") && variable->next->character == ';') {
             variable->previous->predecessor = aloc_string("//");
 
             variable->next->successor = aloc_string(" // Variável não utilizada");
         }
-    }
-    else if(variable->next->string) {
-        if(strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string, " = ")) {
-            more_one = how_many_times(fixed_header, variable);
-            if(more_one <= 1) {
+        else if(variable->next->string) {
+            if(strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string, " = ")) {
                 if(variable->next->next->character == '\'' && variable->next->next->next->next->next->character == ';') {
                     variable->previous->predecessor = aloc_string("//");
 
@@ -47,11 +44,8 @@ void variable_not_declarated_alone(list *in_element, header *fixed_header) {
                     variable->next->next->next->successor = aloc_string(" // Variável não utilizada");
                 }
             }
-        }
-        else if (strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string, ", "))
-        {
-            more_one = how_many_times(fixed_header, variable);
-            if(more_one <= 1) {
+            else if (strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string, ", "))
+            {
                 variable->predecessor = aloc_string("/*-- ");
 
                 variable->successor = aloc_string("----*/");
@@ -63,8 +57,8 @@ void variable_not_declarated_alone(list *in_element, header *fixed_header) {
 void variable_not_declarated_middle(list *in_element, header *fixed_header) {
     int more_one = 0;
     list *variable = in_element, *aux_list;
-            more_one = how_many_times(fixed_header, variable);
-
+    
+    more_one = how_many_times(fixed_header, variable);
     if(more_one <= 1) {
         variable->previous->predecessor = aloc_string("/* 1111");
         variable->successor = aloc_string(" 1111*/ ");
