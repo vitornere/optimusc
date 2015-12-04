@@ -6,6 +6,17 @@
 #include "variaveis.h"
 #include "funcoes.h"
 
+void function_not_declarated(list *in_element, header *fixed_header) {
+    int more_one = 0;
+    list *variable = in_element, *aux_list;
+
+    more_one = how_many_times(fixed_header, variable);
+
+    if(more_one <= 1) {
+
+    }
+}
+
 void optimize(header *fixed_header) {
     int i;
     list *in_element = fixed_header->head, *aux_list;
@@ -32,6 +43,12 @@ void optimize(header *fixed_header) {
                     }
                     aux_list = aux_list->next;
                 } while(aux_list->character != ';');
+                if (aux_list->next->character && aux_list->previous->string)
+                {
+                    if (aux_list->next->character == '('){
+                        function_not_declarated (aux_list, fixed_header);
+                    }
+                }
             }
         }
 

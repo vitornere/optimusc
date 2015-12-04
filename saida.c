@@ -38,6 +38,8 @@ int main() {
 	else {
 		nUtilFloat = 4.500000 * (4 + x) * a * (2 - b);
 	}
+	printf(2, 3);
+	teste();
 	
 return 0;
 }
