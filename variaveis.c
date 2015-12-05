@@ -57,8 +57,8 @@ void variable_not_declarated_alone(list *in_element, header *fixed_header) {
                 }
                 else if (!strcmp(variable->next->string, ", "))
                 {
-                    variable->predecessor = aloc_string("/*");
-                    variable->next->predecessor = aloc_string("*/");
+                    variable->predecessor = aloc_string("/*h ");
+                    variable->next->successor = aloc_string(" h*/");
                 }
             }
         } 
