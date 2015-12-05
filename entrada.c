@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
+
 float teste(int x, char c){
 	char oi;	
 }
 
 int main(){
 
-	int x, testeRecursivo, denovo = 10;
+	int x, nUtilAtribuida = 10, banana, rapadura;
 	int y = 3;
-	float real = 1.0, yu, i = 1.00;
-	int teste;
 	char d = 'k';
-	float realMenor, outro, again;
-	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
-	char a;
+	int novovo = 3;
+	int testeNutil;
+	float real = 1.0, yu, i = 1.00;
 	float bolinha = 3.0;
+	float realMenor, outro, floatUtil, nUtilFloat;
+	float Menor, EuMesmo, nFloat;
+	char b = 'b', utilizada, testeRecursivoCharAgain;
+	char a, venezuela;
+
 
 	if(0) {
 		x = 1;
@@ -27,17 +31,22 @@ int main(){
 	}
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
-		real = 3.0 + 3.0 - 3;
+		floatUtil = 3.0 + 3.0 - 3;
+		floatUtil = real + floatUtil*rapadura;
 	}
 	else if (x > 3 || (x + 23) != y){
 		x = 3 * (3 - a) - a / 2;
+		
 	}
 	else {
-		y = 4.5 * (4 + x) * a * z * (2 -b);
+		nUtilFloat = 4.5 * (4 + x) * a * (2 -b);
+		EuMesmo = EuMesmo - nUtilFloat;
+		
 	}
+
+	printf(2, 3);
+	teste();
 
 	return 0;
 	
-	printf(2, 3);
-	teste();
 }

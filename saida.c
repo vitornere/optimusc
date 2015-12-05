@@ -1,31 +1,24 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
 
-int seila() {
+float teste(int x, char c) {
 
-//	int dois; // Variável não utilizada
-	
-return 0;
-}
-
-int everdade() {
-
-//	int dois; // Variável não utilizada
-	
-return 0;
+// 	char oi; // Variável não utilizada
 }
 
 int main() {
 
-	int x, testeRecursivo, denovo = 10;
+	int x/* , nUtilAtribuida = 10 */ /* , banana */ , rapadura; // Variável não utilizada
 	int y = 3;
-	float real = 1.000000, yu, i = 1.000000;
-//	int teste; // Variável não utilizada
-//	char d = 'k'; // Variável não utilizada
-	float realMenor, outro, again;
-	char b = 'b', testeRecursivoChar, testeRecursivoCharAgain;
-	char a;
-//	float bolinha = 3.000000; // Variável não utilizada
+// 	char d = 'k'; // Variável não utilizada
+// 	int novovo = 3; // Variável não utilizada
+// 	int testeNutil; // Variável não utilizada
+	float real = 1.000000/* , yu */ /* , i = 1.000000 */ ; // Variável não utilizada
+	float bolinha = 3.000000;
+	float /*realMenor/* , outro */ , floatUtil, nUtilFloat; // Variável não utilizada
+	float /*Menor*/, EuMesmo/* , nFloat */ ; // Variável não utilizada
+	char b = 'b'/* , utilizada */ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
+	char a/* , venezuela */ ; // Variável não utilizada
 
 	if(0) {
 		x = 1;
@@ -34,18 +27,22 @@ int main() {
 	}
 
 	if(x > 5) {
-//		int c = 3; // Variável não utilizada
+		int c = 3;
 	}
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
-		real = 3.000000 + 3.000000 - 3;
+		floatUtil = 3.000000 + 3.000000 - 3;
+		floatUtil = real + floatUtil * rapadura;
 	}
 	else if(x > 3 || (x + 23) != y) {
 		x = 3 * (3 - a) - a / 2;
 	}
 	else {
-		y = 4.500000 * (4 + x) * a * z * (2 - b);
+		nUtilFloat = 4.500000 * (4 + x) * a * (2 - b);
+		EuMesmo = EuMesmo - nUtilFloat;
 	}
+	printf(2, 3);
+	teste();
 	
 return 0;
 }
