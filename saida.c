@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
 
-float teste(int x, char c) {
+float teste(int numberOne, char c) {
 
 // 	char oi; // Variável não utilizada
 }
@@ -15,41 +15,42 @@ int nUtilizada() {
 
 int main() {
 
-	int x/* , nUtilAtribuida = 10 */ /* , banana */ , rapadura; // Variável não utilizada
-	int y = 3;
-// 	char d = 'k'; // Variável não utilizada
-// 	int novovo = 3; // Variável não utilizada
+	int numberOne/* , notUsedEqaul = 10 */ /* , notUsedAlone */ , usedTail; // Variável não utilizada
+	int intEqual = 3;
+// 	int notUsedIntEqual = 3; // Variável não utilizada
 // 	int testeNutil; // Variável não utilizada
-	float real = 1.000000/* , yu */ /* , i = 1.000000 */ ; // Variável não utilizada
+	float usedReal = 1.000000/* , notUsedFloat */ /* , alone = 1.000000 */ ; // Variável não utilizada
 	float bolinha = 3.000000;
-	float /*h outro,  h*/floatUtil, nUtilFloat;
-	float /*h Menor,  h*/EuMesmo/* , nFloat */ ; // Variável não utilizada
-	char b = 'b'/* , utilizada */ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
-	char a/* , venezuela */ ; // Variável não utilizada
+	float /* outro,  */floatUtil, nUtilFloat;
+	float /* messi,  */neymar/* , cr7 */ ; // Variável não utilizada
+	char vasco = 'b'/* , flamengo */ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
+	char palavra/* , frase */ ; // Variável não utilizada
+// 	char notUsedChar = 'k'; // Variável não utilizada
 
 	if(0) {
-		x = 1;
-		bolinha = 5;
-		y = 2;
+		numberOne = 1;
+		bolinha = 5.000000;
+		intEqual = (intEqual - 2) + bolinha + numberOne;
 	}
 
-	if(x > 5) {
+	if(numberOne > 5) {
 		int c = 3;
 	}
 
-	if(x > 5 && x < 4 || x == 10 && y != x) {
+	if(numberOne > 5 && numberOne < 4 || numberOne == 10 && intEqual != numberOne) {
 		floatUtil = 3.000000 + 3.000000 - 3;
-		floatUtil = real + floatUtil * rapadura;
+		usedTail = usedReal + floatUtil * floatUtil;
 	}
-	else if(x > 3 || (x + 23) != y) {
-		x = 3 * (3 - a) - a / 2;
+	else if(numberOne > 3 || (numberOne + 23) != intEqual) {
+		numberOne = 3 * (3 - bolinha) / 2;
+		vasco = numberOne;
 	}
 	else {
-		nUtilFloat = 4.500000 * (4 + x) * a * (2 - b);
-		EuMesmo = EuMesmo - nUtilFloat;
+		nUtilFloat = 4.500000 * (4 + numberOne) * (2 - b);
+		neymar = neymar - nUtilFloat;
 	}
-	printf(2, 3);
-	teste();
+	printf(	"Funcionando legal");
+	teste(intEqual, palavra);
 	
 return 0;
 }
