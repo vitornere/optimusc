@@ -6,6 +6,22 @@
 #include "variaveis.h"
 #include "funcoes.h"
 
+int how_many_times(header *fixed_header, list *variable) {
+    int more_one = 0, i;
+    list *aux_list = fixed_header->head;
+
+    for(i = 0; i<fixed_header->n_elem; i++) {
+        if(aux_list && aux_list->string) {
+            if(!strcmp(aux_list->string, variable->string)) {
+                more_one++;
+            }
+        }
+    aux_list = aux_list->next;
+    }
+
+    return more_one;
+}
+
 void optimize(header *fixed_header) {
     int i;
     list *in_element = fixed_header->head, *aux_list;
@@ -15,8 +31,13 @@ void optimize(header *fixed_header) {
         if(in_element->string)
         {
             aux_list = in_element;
-            if(!strcmp(in_element->string, "char ") || !strcmp(in_element->string, "int ") || !strcmp(in_element->string, "float ")) 
+            if(!strcmp(in_element->string, "char ") || !strcmp(in_element->string, "int ") 
+               || !strcmp(in_element->string, "float ") || !strcmp(in_element->string, "\nchar ")
+               || !strcmp(in_element->string, "\nint ") || !strcmp(in_element->string, "\nfloat "))
             {
+/**************************************
+    Variáveis não utilizadas
+***************************************/
                 for (aux_list = aux_list->next ; aux_list->character != ';' ; aux_list = aux_list->next)
                 {
                     if(aux_list->string && aux_list->previous->string) 
@@ -41,6 +62,13 @@ void optimize(header *fixed_header) {
                         }
                         variable_not_declarated_alone(aux_list, fixed_header);
                     }
+                }
+
+/**************************************
+    Funções não utilizadas
+***************************************/
+                if(in_element->next->next->character == '(' && strcmp(in_element->next->string, "main")) {
+                    function_not_declarated(in_element, fixed_header);
                 }
             }
         }

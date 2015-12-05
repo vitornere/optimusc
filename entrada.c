@@ -5,6 +5,10 @@ float teste(int x, char c){
 	char oi;	
 }
 
+int nUtilizada() {
+	float ameba;
+}
+
 int main(){
 
 	int x, nUtilAtribuida = 10, banana, rapadura;

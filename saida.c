@@ -6,6 +6,13 @@ float teste(int x, char c) {
 // 	char oi; // Variável não utilizada
 }
 
+/* 
+int nUtilizada() {
+
+// 	float ameba; // Variável não utilizada
+}
+*/ // Função não utilizada 
+
 int main() {
 
 	int x/* , nUtilAtribuida = 10 */ /* , banana */ , rapadura; // Variável não utilizada
