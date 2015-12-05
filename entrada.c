@@ -14,7 +14,7 @@ int main(){
 	int testeNutil;
 	float real = 1.0, yu, i = 1.00;
 	float bolinha = 3.0;
-	float realMenor, outro, floatUtil, nUtilFloat;
+	float outro, floatUtil, nUtilFloat;
 	float Menor, EuMesmo, nFloat;
 	char b = 'b', utilizada, testeRecursivoCharAgain;
 	char a, venezuela;

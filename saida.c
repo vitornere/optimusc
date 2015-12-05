@@ -15,8 +15,8 @@ int main() {
 // 	int testeNutil; // Variável não utilizada
 	float real = 1.000000/* , yu */ /* , i = 1.000000 */ ; // Variável não utilizada
 	float bolinha = 3.000000;
-	float /*realMenor/* , outro */ , floatUtil, nUtilFloat; // Variável não utilizada
-	float /*Menor*/, EuMesmo/* , nFloat */ ; // Variável não utilizada
+	float /*h outro,  h*/floatUtil, nUtilFloat;
+	float /*h Menor,  h*/EuMesmo/* , nFloat */ ; // Variável não utilizada
 	char b = 'b'/* , utilizada */ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
 	char a/* , venezuela */ ; // Variável não utilizada
 
