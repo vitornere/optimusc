@@ -29,11 +29,14 @@ void variable_not_declarated_alone(list *in_element, header *fixed_header) {
                 not_declarated_init(variable, fixed_header);
             }
             else if(variable->next->string) {
+                //verifica atribuições
                 if(!strcmp(variable->next->string, " = ")) {
+                    //Verifica se a atribuição é de char.
                     if(variable->next->next->character == '\'') {
                         variable->previous->predecessor = aloc_string("// ");
                         comments_unused_variable(variable, fixed_header);
                     }
+                    //Verifica se a tribuição esta sozinha.
                     else if(variable->next->next->next->character == ';') {
                         variable->previous->predecessor = aloc_string("// ");
                         comments_unused_variable(variable, fixed_header);
@@ -41,14 +44,15 @@ void variable_not_declarated_alone(list *in_element, header *fixed_header) {
                 }
                 else if (!strcmp(variable->next->string, ", "))
                 {
-                    variable->predecessor = aloc_string("/*h ");
-                    variable->next->successor = aloc_string(" h*/");
+                    variable->predecessor = aloc_string("/* ");
+                    variable->next->successor = aloc_string(" */");
                 }
             }
         } 
     }
 }
 
+//Comenta variaveis entre declarações.
 void variable_not_declarated_middle(list *in_element, header *fixed_header) {
     int more_one = 0;
     list *variable = in_element, *aux_list;
@@ -61,6 +65,7 @@ void variable_not_declarated_middle(list *in_element, header *fixed_header) {
     }
 }
 
+//Comenta variaveis com atribuições '='
 void variable_not_declarated_equals(list *in_element, header *fixed_header) {
     int more_one = 0;
     list *variable = in_element, *aux_list;

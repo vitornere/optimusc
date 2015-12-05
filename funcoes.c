@@ -16,11 +16,9 @@ void function_not_declarated(list* in_element, header *fixed_header) {
 	    		break;
 	    	}
 	    }
-
-    	if(aux_element->character == ';') {
+    	else if(aux_element->character == ';') {
     		return;
     	}
-
     	aux_element = aux_element->next;
     } while(1);
 
@@ -28,7 +26,6 @@ void function_not_declarated(list* in_element, header *fixed_header) {
     more_one = how_many_times(fixed_header, variable);
 
     if(more_one<=1) {
-    	printf("\naehoo: %s\n", in_element->string);
     	in_element->predecessor = aloc_string("\n/* ");
 
     	do {
@@ -39,7 +36,6 @@ void function_not_declarated(list* in_element, header *fixed_header) {
     		}
     		aux_element = aux_element->next;
     	} while(1);
-    	printf("\niehoo: %s\n", aux_element->string);
     	aux_element->successor = aloc_string("*/ // Função não utilizada \n");
     }
 }
