@@ -6,6 +6,22 @@
 #include "variaveis.h"
 #include "funcoes.h"
 
+int how_many_times(header *fixed_header, list *variable) {
+    int more_one = 0, i;
+    list *aux_list = fixed_header->head;
+
+    for(i = 0; i<fixed_header->n_elem; i++) {
+        if(aux_list && aux_list->string) {
+            if(!strcmp(aux_list->string, variable->string)) {
+                more_one++;
+            }
+        }
+    aux_list = aux_list->next;
+    }
+
+    return more_one;
+}
+
 void optimize(header *fixed_header) {
     int i;
     list *in_element = fixed_header->head, *aux_list;
