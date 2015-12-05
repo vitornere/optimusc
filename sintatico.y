@@ -245,6 +245,10 @@ value:
     {
     	update_list_float_with_space(fixed_header, $1, amount_space);
     }
+    | TK_VALUE_STRING
+    {
+    	update_list_string_with_space(fixed_header, $1, amount_space);
+    }
 	| TK_VARIABLE
     {
 		update_list_string(fixed_header, $1);
@@ -436,6 +440,7 @@ char_only_declarated:
 	}
 	| return_declared_int
 ;
+
 
 return_declared_int:
 	TK_RE_RETURN TK_VALUE_INT TK_END_INST_LINE

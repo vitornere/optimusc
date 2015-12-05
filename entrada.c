@@ -45,7 +45,7 @@ int main(){
 	}
 
 	printf(2, 3);
-	teste();
+	teste("oi");
 
 	return 0;
 	
