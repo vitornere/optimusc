@@ -31,8 +31,13 @@ void optimize(header *fixed_header) {
         if(in_element->string)
         {
             aux_list = in_element;
-            if(!strcmp(in_element->string, "char ") || !strcmp(in_element->string, "int ") || !strcmp(in_element->string, "float ")) 
+            if(!strcmp(in_element->string, "char ") || !strcmp(in_element->string, "int ") 
+               || !strcmp(in_element->string, "float ") || !strcmp(in_element->string, "\nchar ")
+               || !strcmp(in_element->string, "\nint ") || !strcmp(in_element->string, "\nfloat "))
             {
+/**************************************
+    Variáveis não utilizadas
+***************************************/
                 for (aux_list = aux_list->next ; aux_list->character != ';' ; aux_list = aux_list->next)
                 {
                     if(aux_list->string && aux_list->previous->string) 
@@ -57,6 +62,13 @@ void optimize(header *fixed_header) {
                         }
                         variable_not_declarated_alone(aux_list, fixed_header);
                     }
+                }
+
+/**************************************
+    Funções não utilizadas
+***************************************/
+                if(in_element->next->next->character == '(' && strcmp(in_element->next->string, "main")) {
+                    function_not_declarated(in_element, fixed_header);
                 }
             }
         }
