@@ -36,3 +36,4 @@ sintatico.h
 sintatico.c 
 lexico.c
 main.c
+saida.c

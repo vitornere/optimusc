@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "minha_biblioteca.h"
+float teste(int x, char c){
+	char oi;	
+}
 
 int main(){
 
@@ -34,4 +37,7 @@ int main(){
 	}
 
 	return 0;
+	
+	printf(2, 3);
+	teste();
 }

@@ -10,7 +10,7 @@ extern FILE* yyout;
 header *fixed_header;
 list *current_list;
 
-int amount_space = 0, i, started_header = 0, end_file = 0;
+int amount_space = 0, i, started_header = 0;
 %}
 
 %token TK_RE_INT
@@ -43,6 +43,7 @@ int amount_space = 0, i, started_header = 0, end_file = 0;
 %token TK_MINUS
 %token TK_TIMES
 %token TK_DIVI
+%token END
 
 %start start
 
@@ -60,16 +61,9 @@ int amount_space = 0, i, started_header = 0, end_file = 0;
 /**********************/
 
 start:
-	TK_END_INST
+	END
 	{
-        amount_space--;
-        update_list_string_with_space(fixed_header, "}\n", amount_space);
-
-        end_file --;
-        printf("\n\nend_file: %d\n\n", end_file);
-
-        if(!end_file) {
-            /**********************/
+			/**********************/
             /*    Boas Práticas   */
             /**********************/
 
@@ -83,7 +77,6 @@ start:
             /*    Impressão .c    */
             /**********************/
                     yyout = fopen("saida.c", "w");
-                    printf("\n%d\n", end_file);
                     if(!yyout) {
                         printf("\n Falha ao abrir o arquivo\n");
                         exit(1);
@@ -92,44 +85,61 @@ start:
                     fclose(yyout);
 
                     free_list(fixed_header);
+                    printf("Compilação bem sucedida!!!\n\n");
+                    exit(0);
             /**********************/
             /*    Impressão .c    */
             /**********************/
-        }
 	}
+	|
+	TK_END_INST
+	{
+        amount_space--;
+        update_list_string_with_space(fixed_header, "}\n", amount_space);
+	} start
 	| int_function start
 ;
 
-atribution_int:
-	TK_RE_INT  TK_VARIABLE TK_COMA atribution_int
+variable_types:
+	TK_RE_INT
 	{
-		update_list_string(fixed_header, "int");
+		printf("entrou no 'types' \n");
+		update_list_string(fixed_header, "int ");
+	}
+	| TK_RE_FLOAT
+	{
+		update_list_string(fixed_header, "float ");
+	}
+	| TK_RE_CHAR
+	{
+		update_list_string(fixed_header, "char ");
+	}
+;
+atributions:
+	variable_types TK_VARIABLE TK_COMA
+	{
 		update_list_string(fixed_header, $2);
 		update_list_string(fixed_header, ", ");
-	}
-	| TK_RE_INT TK_VARIABLE
+	} atributions
+	| variable_types TK_VARIABLE
 	{
-		update_list_string(fixed_header, "int ");
 		update_list_string(fixed_header, $2);
 	}
 ;
 
 int_function:
-	TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS
+	TK_RE_INT  TK_VARIABLE TK_INIT_BRACKETS
 	{
 		update_list_string_with_space(fixed_header, "\nint ",amount_space);
 		update_list_string(fixed_header, $2);
 		update_list_character(fixed_header, '(');
 	}
-	atribution_int TK_END_BRACKETS TK_INIT_INST
+	atributions TK_END_BRACKETS TK_INIT_INST
 	{
 		update_list_character(fixed_header, ')');
 		update_list_string(fixed_header," {\n\n");
 
         ++amount_space;
-
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
 	}
 	| TK_RE_INT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
 	{
@@ -142,13 +152,67 @@ int_function:
 		update_list_string(fixed_header, " {\n\n");
 
         ++amount_space;
+	}
+	| float_function
+;
 
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
+float_function:
+	TK_RE_FLOAT  TK_VARIABLE TK_INIT_BRACKETS
+	{
+		update_list_string_with_space(fixed_header, "\nfloat ",amount_space);
+		update_list_string(fixed_header, $2);
+		update_list_character(fixed_header, '(');
+	}
+	atributions TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_character(fixed_header, ')');
+		update_list_string(fixed_header," {\n\n");
+
+        ++amount_space;
+	}
+	| TK_RE_FLOAT TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_string_with_space(fixed_header,"\nint ", amount_space);
+		update_list_string(fixed_header, $2);
+
+		update_list_character(fixed_header, '(');
+		update_list_character(fixed_header, ')');
+
+		update_list_string(fixed_header, " {\n\n");
+
+        ++amount_space;
+	}
+	| char_function
+;
+
+char_function:
+	TK_RE_CHAR TK_VARIABLE TK_INIT_BRACKETS
+	{
+		update_list_string_with_space(fixed_header, "\nchar ",amount_space);
+		update_list_string(fixed_header, $2);
+		update_list_character(fixed_header, '(');
+	}
+	atributions TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_character(fixed_header, ')');
+		update_list_string(fixed_header," {\n\n");
+
+        ++amount_space;
+	}
+	| TK_RE_CHAR TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_INIT_INST
+	{
+		update_list_string_with_space(fixed_header,"\nint ", amount_space);
+		update_list_string(fixed_header, $2);
+
+		update_list_character(fixed_header, '(');
+		update_list_character(fixed_header, ')');
+
+		update_list_string(fixed_header, " {\n\n");
+
+        ++amount_space;
 	}
 	| expression_final
 ;
-
 expression_final:
 	TK_VARIABLE TK_ATTRIBUITION
     {
@@ -159,7 +223,17 @@ expression_final:
     {
    		update_list_character(fixed_header, ';');
     }
-	| float_attribuited
+	| function_declared
+;
+
+value_atriibuted:
+	value TK_COMA
+	{
+		update_list_string(fixed_header, ", ");
+	} 
+	value_atriibuted
+	| value
+
 ;
 
 value:
@@ -175,6 +249,27 @@ value:
     {
 		update_list_string(fixed_header, $1);
     }
+;
+
+function_declared:
+	TK_VARIABLE TK_INIT_BRACKETS
+	{
+		update_list_string_with_space(fixed_header, $1, amount_space);
+		update_list_character(fixed_header, '(');
+	}
+	value_atriibuted TK_END_BRACKETS TK_END_INST_LINE
+	{
+		update_list_character(fixed_header, ')');
+		update_list_character(fixed_header, ';');
+	}
+	|TK_VARIABLE TK_INIT_BRACKETS TK_END_BRACKETS TK_END_INST_LINE
+	{
+		update_list_string_with_space(fixed_header, $1, amount_space);
+		update_list_character(fixed_header, '(');
+		update_list_character(fixed_header, ')');
+		update_list_character(fixed_header, ';');
+	}
+	| float_attribuited
 ;
 
 aritmetcs:
@@ -407,9 +502,6 @@ conditional_elif:
    		update_list_string(fixed_header, " {\n");
 
         ++amount_space;
-
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
     }
     start
 	| TK_RE_ELSE TK_RE_IF TK_INIT_BRACKETS
@@ -428,9 +520,6 @@ conditional_elif:
 		update_list_string(fixed_header, " {\n");
 
         ++amount_space;
-
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
     }
     start
 	| conditional_else
@@ -444,9 +533,6 @@ conditional_else:
 		update_list_string(fixed_header," {\n");
 
         ++amount_space;
-
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
     }
     start
 	| conditional_if
@@ -466,9 +552,6 @@ conditional_if:
    		update_list_string(fixed_header, " {\n");
 
         ++amount_space;
-
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
     }
     start
 	| TK_RE_IF TK_INIT_BRACKETS
@@ -484,9 +567,6 @@ conditional_if:
    		update_list_string(fixed_header, " {\n");
 
         ++amount_space;
-
-        end_file++;
-        printf("\n\nend_file: %d\n\n", end_file);
     }
     start
 	| declarated_library
