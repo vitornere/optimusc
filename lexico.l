@@ -17,8 +17,8 @@
 INT         [-+]?[0-9]+
 exponant	[eE]{INT}
 FLOAT       {INT}("."[0-9]+)?{exponant}?
+STRING		("\"")(([a-zA-Z_][a-zA-Z0-9_]*)[ \t\v\f]*)*("\"")
 CHAR        (\').{1}(\')
-STRING		("\""){VARIABLE}("\"")
 WHITESPACE  [ \t\v\f]*
 NEWLINE		[\n|\n\l|\r\n]
 VARIABLE	([a-zA-Z_][a-zA-Z0-9_]*)
