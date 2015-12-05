@@ -36,7 +36,7 @@ void optimize(header *fixed_header) {
                         {
                             if(!strcmp(aux_list->previous->string, ", ") && aux_list->next->character == ';')
                             {
-                                variable_not_declarated_tail(aux_list, fixed_header);
+                                variable_not_declarated_middle(aux_list, fixed_header);
                             }
                         }
                         variable_not_declarated_alone(aux_list, fixed_header);

@@ -7,15 +7,18 @@ float teste(int x, char c){
 
 int main(){
 
-	int x, nUtilAtribuida = 10;
-	int y = 3, yy;
-	float real = 1.0, yu, i = 1.00;
-	int testeNutil;
+	int x, nUtilAtribuida = 10, banana, rapadura;
+	int y = 3;
 	char d = 'k';
-	float realMenor, outro, floatUtil, nUtilFloat;
-	char b = 'b', utilizada, testeRecursivoCharAgain;
-	char a, mamada;
+	int novovo = 3;
+	int testeNutil;
+	float real = 1.0, yu, i = 1.00;
 	float bolinha = 3.0;
+	float realMenor, outro, floatUtil, nUtilFloat;
+	float Menor, EuMesmo, nFloat;
+	char b = 'b', utilizada, testeRecursivoCharAgain;
+	char a, venezuela;
+
 
 	if(0) {
 		x = 1;
@@ -29,7 +32,7 @@ int main(){
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
 		floatUtil = 3.0 + 3.0 - 3;
-		floatUtil = real + floatUtil;
+		floatUtil = real + floatUtil*rapadura;
 	}
 	else if (x > 3 || (x + 23) != y){
 		x = 3 * (3 - a) - a / 2;
@@ -37,6 +40,7 @@ int main(){
 	}
 	else {
 		nUtilFloat = 4.5 * (4 + x) * a * (2 -b);
+		EuMesmo = EuMesmo - nUtilFloat;
 		
 	}
 

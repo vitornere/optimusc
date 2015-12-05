@@ -3,20 +3,22 @@
 
 float teste(int x, char c) {
 
-//	char oi; // Variável não utilizada
+// 	char oi; // Variável não utilizada
 }
 
 int main() {
 
-	int x/* , nUtilAtribuida = 10 */ ; // Variável não utilizada
-	int y = 3/* , yy */ ; // Variável não utilizada
-	float real = 1.000000/* 1111, yu 1111*/ /* , i = 1.000000 */ ; // Variável não utilizada
-//	int testeNutil; // Variável não utilizada
-//	char d = 'k'; // Variável não utilizada
-	float /*-- realMenor----*//* 1111, outro 1111*/ , floatUtil, nUtilFloat; // Variável não utilizada
-	char b = 'b'/* 1111, utilizada 1111*/ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
-	char a/* , mamada */ ; // Variável não utilizada
+	int x/* , nUtilAtribuida = 10 */ /* , banana */ , rapadura; // Variável não utilizada
+	int y = 3;
+// 	char d = 'k'; // Variável não utilizada
+// 	int novovo = 3; // Variável não utilizada
+// 	int testeNutil; // Variável não utilizada
+	float real = 1.000000/* , yu */ /* , i = 1.000000 */ ; // Variável não utilizada
 	float bolinha = 3.000000;
+	float /*realMenor/* , outro */ , floatUtil, nUtilFloat; // Variável não utilizada
+	float /*Menor*/, EuMesmo/* , nFloat */ ; // Variável não utilizada
+	char b = 'b'/* , utilizada */ /* , testeRecursivoCharAgain */ ; // Variável não utilizada
+	char a/* , venezuela */ ; // Variável não utilizada
 
 	if(0) {
 		x = 1;
@@ -30,13 +32,14 @@ int main() {
 
 	if(x > 5 && x < 4 || x == 10 && y != x) {
 		floatUtil = 3.000000 + 3.000000 - 3;
-		floatUtil = real + floatUtil;
+		floatUtil = real + floatUtil * rapadura;
 	}
 	else if(x > 3 || (x + 23) != y) {
 		x = 3 * (3 - a) - a / 2;
 	}
 	else {
 		nUtilFloat = 4.500000 * (4 + x) * a * (2 - b);
+		EuMesmo = EuMesmo - nUtilFloat;
 	}
 	printf(2, 3);
 	teste();
