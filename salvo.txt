@@ -1,0 +1,42 @@
+else if(variable->next->string) {
+            if(strcmp(variable->previous->string, ", ") && !strcmp(variable->next->string, " = ")) {
+                more_one = how_many_times(fixed_header, variable);
+                if(more_one <= 1) {
+                    if(variable->next->next->character == '\'' && variable->next->next->next->next->next->character == ';') {
+                        variable->previous->predecessor = aloc_string("//");
+
+                        variable->next->next->next->next->next->successor = aloc_string(" // Variável não utilizada");
+                    }
+                    else if(variable->next->next->next->character == ';') {
+                        variable->previous->predecessor = aloc_string("//");
+
+                        variable->next->next->next->successor = aloc_string(" // Variável não utilizada");
+                    }
+                }
+            }
+        }
+
+void variable_not_used_in_scope(list *in_element, header *fixed_header) {
+    list *variable = in_element, *aux_list = in_element->next;
+    int i;
+
+    for(i = 0; i<fixed_header->n_elem; i++) {
+        if(aux_list && aux_list->string && aux_list->next->string) {
+            if(!strcmp(variable->string, aux_list->string) &&
+               !strcmp(aux_list->next->string, " = ") && aux_list->next->character != ';' &&
+                strcmp(aux_list->previous->string, "char ") && strcmp(aux_list->previous->string, "int ")
+                && strcmp(aux_list->previous->string, "float ")) {
+                aux_list->predecessor = aloc_string("//");
+                printf("\nabeaba: %s == %s, ", variable->string, aux_list->string);
+                do {
+                    printf(", %c", aux_list->character);
+                    aux_list = aux_list->next;
+                } while(aux_list->character != ';');
+                aux_list->successor = aloc_string(" // alocaVariável não utilizada");
+                printf("\n");
+            }
+        }
+
+        aux_list = aux_list->next;
+    }    
+}

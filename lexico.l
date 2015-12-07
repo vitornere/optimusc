@@ -14,12 +14,13 @@
 /* Expressões Regulares */
 /************************/
 
-INT         	[-+]?[0-9]+
+INT         [-+]?[0-9]+
 exponant	[eE]{INT}
-FLOAT       	{INT}("."[0-9]+)?{exponant}?
-CHAR        	(\').{1}(\')
-WHITESPACE  	[ \t\v\f]*
-NEWLINE	[\n|\n\l|\r\n]
+FLOAT       {INT}("."[0-9]+)?{exponant}?
+STRING		("\"")(([a-zA-Z0-9_]*)[ \t\v\f]*)*("\"")
+CHAR        (\').{1}(\')
+WHITESPACE  [ \t\v\f]*
+NEWLINE		[\n|\n\l|\r\n]
 VARIABLE	([a-zA-Z_][a-zA-Z0-9_]*)
 TYPE		(int|float|char)
 LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
@@ -72,6 +73,13 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 	printf("\nLexico: Encontrado CHAR atribuido => %c", yytext[1]);
 	yylval.caracter = yytext[1];
 	return(TK_VALUE_CHAR);
+}
+
+{STRING} {
+	printf("\nLexico: Encontrado: String: %s", yytext);
+	yylval.string = (char*) malloc(sizeof(char)*strlen(yytext));
+	strcpy(yylval.string, yytext);
+	return(TK_VALUE_STRING);
 }
 
 "+" {
@@ -179,6 +187,10 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 "||" {
 	printf("Lexico: Encontrado: OR");
 	return(TK_OR);
+}
+
+<<EOF>> {
+	return(END);
 }
 
 %%
