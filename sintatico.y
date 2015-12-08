@@ -103,7 +103,6 @@ start:
 variable_types:
 	TK_RE_INT
 	{
-		printf("entrou no 'types' \n");
 		update_list_string(fixed_header, "int ");
 	}
 	| TK_RE_FLOAT
