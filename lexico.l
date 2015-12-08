@@ -37,14 +37,12 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 }
 
 {LIBRARY} {
-	printf("\nLexico: Encontrado: Biblioteca: %s", yytext);
 	yylval.string = (char*) malloc(sizeof(char)*strlen(yytext));
 	strcpy(yylval.string, yytext);
 	return(TK_LIBRARY);
 }
 
 {TYPE} {
-	printf("\n\nLexico: Encontrado TYPE: %s", yytext);
 
 	if(!strcmp(yytext, "int")) {
 		return(TK_RE_INT);
@@ -58,134 +56,109 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 }
 
 {INT} {
-	printf("\nLexico: Encontrado INT de valor: %d\n", atoi(yytext));
 	yylval.number_int = atoi(yytext);
 	return(TK_VALUE_INT);
 }
 
 {FLOAT} {
-	printf("\nLexico: Encontrado FLOAT de valor: %f\n", atof(yytext));
 	yylval.number_float = atof(yytext);
 	return(TK_VALUE_FLOAT);
 }
 
 {CHAR} {
-	printf("\nLexico: Encontrado CHAR atribuido => %c", yytext[1]);
 	yylval.caracter = yytext[1];
 	return(TK_VALUE_CHAR);
 }
 
 {STRING} {
-	printf("\nLexico: Encontrado: String: %s", yytext);
 	yylval.string = (char*) malloc(sizeof(char)*strlen(yytext));
 	strcpy(yylval.string, yytext);
 	return(TK_VALUE_STRING);
 }
 
 "+" {
-	printf("\nLexico: Encontrado: +\n");
 	return(TK_PLUS);
 }
 
 "-" {
-	printf("\nLexico: Encontrado: -\n");
 	return(TK_MINUS);
 }
 
 "*" {
-	printf("\nLexico: Encontrado: *\n");
 	return(TK_TIMES);
 }
 
 "/" {
-	printf("\nLexico: Encontrado: /\n");
 	return(TK_DIVI);
 }
 
 ";"	{
-	printf("Lexico: Encontrado: ;\n");
 	return(TK_END_INST_LINE);
 }
 
 "{" {
-	printf("\nLexico: Encontrado: {\n");
 	return(TK_INIT_INST);
 }
 
 "}" {
-	printf("\nLexico: Encontrado: }\n");
 	return(TK_END_INST);
 }
 
 "(" {
-	printf("\nLexico: Encontrado: (\n");
 	return(TK_INIT_BRACKETS);
 }
 
 ")" {
-	printf("\nLexico: Encontrado: )\n");
 	return(TK_END_BRACKETS);
 }
 
 "," {
-	printf("\nLexico: Encontrado: ,\n");
 	return(TK_COMA);
 }
 
 "return" {
-	printf("\nLexico: Encontrado: return");
 	return(TK_RE_RETURN);
 }
 
 "else" {
-	printf("\nLexico: Encontrado: else");
 	return(TK_RE_ELSE);
 }
 
 
 "if" {
-	printf("\nLexico: Encontrado: if");
 	return(TK_RE_IF);
 }
 
 {VARIABLE} {
-	printf("\nLexico: Encontrado VARIAVEL: %s\n", yytext);
 	yylval.string = (char*) malloc(sizeof(char)*strlen(yytext));
 	strcpy(yylval.string, yytext);
 	return(TK_VARIABLE);
 }
 
 "=" {
-	printf("Lexico: Encontrado: %c", yytext[0]);
 	return(TK_ATTRIBUITION);
 }
 
 "<" {
-	printf("Lexico: Encontrado: %c", yytext[0]);
 	return(TK_COMPARISON_LT);
 }
 ">" {
-	printf("Lexico: Encontrado: %c", yytext[0]);
 	return(TK_COMPARISON_GT);
 }
 
 "==" {
-	printf("Lexico: Encontrado: ==");
 	return(TK_COMPARISON_ET);
 }
 
 "!=" {
-	printf("Lexico: Encontrado: !=");
 	return(TK_COMPARISON_DT);
 }
 
 "&&" {
-	printf("Lexico: Encontrado: AND");
 	return(TK_AND);
 }
 
 "||" {
-	printf("Lexico: Encontrado: OR");
 	return(TK_OR);
 }
 
@@ -196,14 +169,12 @@ LIBRARY 	("#include"{WHITESPACE}("\""|<){VARIABLE}".h"("\""|>))
 %%
 
 void yyerror(char* str) {
-	printf("\nErro: %s\n", str);
 }
 
 int main() {
 
 
 	if((yyin = fopen("entrada.c", "r")) == NULL) {
-		printf("\nErro ao abrir o arquivo!\n");
 		exit(1);
 	}
 
